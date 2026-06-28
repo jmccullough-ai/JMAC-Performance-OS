@@ -1,58 +1,83 @@
 /**
- * JMAC Performance OS — DatabaseSeed.gs
- * Version: v3.0.0-alpha.1
- * REPLACE/ADD: This module seeds starter database sheets.
+ * JMAC Performance OS v3.0.0-alpha.2
+ * File: DatabaseSeed.gs
+ * Purpose: Creates editable database sheets inside Google Sheets.
  */
-
 function JMAC_seedDatabases() {
-  JMAC_writeRows_(JMAC.SHEETS.EXERCISES, JMAC_seedExerciseRows_(), true);
-  JMAC_writeRows_(JMAC.SHEETS.SOLUTIONS, JMAC_seedSolutionRows_(), true);
-  JMAC_writeRows_(JMAC.SHEETS.SPORTS, [['sport'],['Football'],['Basketball'],['Soccer'],['Baseball'],['Track'],['Wrestling'],['Volleyball'],['Lacrosse'],['General']], true);
-  JMAC_writeRows_(JMAC.SHEETS.ECOSYSTEMS, [['ecosystem','description'],['Velocity','Sprint mechanics, acceleration, max velocity, elastic contacts'],['Forge','Strength, carries, trunk, structural capacity'],['Power','Jumps, throws, triple extension, explosive outputs'],['Armor','Durability, tissue capacity, joint-specific protection']], true);
-  JMAC_writeRows_(JMAC.SHEETS.METRICS, [['metric'],['Acceleration'],['Max Velocity'],['Elastic Power'],['Strength'],['Hypertrophy'],['Armor']], true);
-  JMAC_writeRows_(JMAC.SHEETS.RULES, [['rule','value'],['SpeedPowerFirst','TRUE'],['ArmorEverySession','TRUE'],['MaxTrainingDays','4'],['NoSprintJumpFinishers','TRUE']], true);
-  JMAC_writeRows_(JMAC.SHEETS.PROGRESSIONS, [['week','strategy'],['1','Base / technical'],['2','Add quality volume'],['3','Add set or load'],['4','Deload / absorb']], true);
-  JMAC_writeRows_(JMAC.SHEETS.DNA, [['principle','description'],['Intent','Every session has a clear adaptation target'],['Progression','Progress from extensive to intensive before advanced loading'],['Speed','Speed/power happen before fatigue'],['Armor','Durability is trained every day']], true);
+  JMAC_seedExerciseDatabase();
+  JMAC_seedPerformanceSolutions();
 }
 
-function JMAC_seedExerciseRows_() {
+function JMAC_seedExerciseDatabase() {
+  var rows = JMAC_getStarterExercises_();
+  JMAC_writeTable_(JMAC.SHEETS.EXERCISE_DB, rows);
+}
+
+function JMAC_seedPerformanceSolutions() {
+  var rows = [
+    { Sport: 'Football', Priority: 'Acceleration|Forge|Armor', InjuryBias: 'Neck|Hamstring|Groin|Tibialis' },
+    { Sport: 'Basketball', Priority: 'Elasticity|Power|Landing', InjuryBias: 'Patellar Tendon|Soleus|Ankle' },
+    { Sport: 'Soccer', Priority: 'COD|Elasticity|Armor', InjuryBias: 'Groin|Adductor|Hamstring|Calf' },
+    { Sport: 'Track', Priority: 'Acceleration|Max Velocity|Elasticity', InjuryBias: 'Hamstring|Hip Flexor|Foot/Ankle' },
+    { Sport: 'General', Priority: 'Strength|Power|Armor', InjuryBias: 'Trunk|Hip|Shoulder' }
+  ];
+  JMAC_writeTable_(JMAC.SHEETS.PERFORMANCE_SOLUTIONS, rows);
+}
+
+function JMAC_getStarterExercises_() {
   return [
-    JMAC.DATABASE_HEADERS.EXERCISES,
-    ['prepA','A-Skip Series','Prep','Velocity','Acceleration|Max Velocity','sprint mechanics','Any','11','99','Any','Any','Bodyweight','2','1','1','FALSE','horizontal','rhythm|posture','2','10 yd','30s','Tall'],
-    ['prepB','Pogo Jump + Stick','Prep','Velocity','Elastic Power','jump landing','Any','11','99','Any','Any','Bodyweight','2','1','1','FALSE','vertical','landing|ankle','2','8','30s','Stiff'],
-    ['prepC','Worlds Greatest Stretch','Prep','Armor','Armor','mobility','Any','11','99','Any','Any','Bodyweight','1','1','1','FALSE','multi','hips|t-spine','1','5/side','20s','Open'],
-    ['spA','Falling Start','SpeedPower','Velocity','Acceleration','sprint','Any','11','99','Any','Any','Bodyweight','4','2','2','FALSE','horizontal','acceleration|first step','3','10 yd','60s','Push'],
-    ['spB','Wicket Run Rhythm','SpeedPower','Velocity','Max Velocity','sprint','Track|Football|Soccer|Basketball|Any','13','99','Intermediate|Advanced|Any','Any','Mini Hurdles','4','3','3','FALSE','vertical','max velocity|rhythm','3','15 yd','75s','Tall'],
-    ['spC','Countermovement Jump','SpeedPower','Power','Elastic Power','jump','Any','11','99','Any','Any','Bodyweight','3','2','2','FALSE','vertical','jump|power','3','4','60s','Snap'],
-    ['spD','Med Ball Scoop Toss','SpeedPower','Power','Med Ball Power|Elastic Power','throw','Any','11','99','Any','Any','Med Ball','3','2','2','FALSE','horizontal','throw|hip','3','5/side','60s','Explode'],
-    ['sa1','Goblet Squat','StrengthA','Forge','Strength','squat','Any','11','99','Any','Any','DB|KB','3','1','1','FALSE','vertical','lower|squat','3','6','75s','Brace'],
-    ['sa2','DB Bench Press','StrengthA','Forge','Strength','push','Any','11','99','Any','Any','DB','3','1','1','FALSE','upper','upper|push','3','8','75s','Drive'],
-    ['sa3','Trap Bar Deadlift','StrengthA','Forge','Strength','hinge','Football|Basketball|Track|Any','13','99','Intermediate|Advanced|Any','Offseason|Preseason|Any','Trap Bar','4','2','2','FALSE','vertical','lower|hinge','3','5','90s','Push floor'],
-    ['sa4','Half-Kneeling Landmine Press','StrengthA','Forge|Power','Strength','push','Any','11','99','Any','Any','Landmine','3','2','1','FALSE','upper','upper|trunk','3','6/side','75s','Reach'],
-    ['sb1','RFESS','StrengthB','Forge','Strength','lunge','Any','13','99','Intermediate|Advanced|Any','Any','DB','4','3','2','TRUE','vertical','lower|single leg','3','6/side','90s','Control'],
-    ['sb2','Chest Supported Row','StrengthB','Forge','Strength','pull','Any','11','99','Any','Any','DB|Bench','3','1','1','FALSE','upper','upper|pull|scap','3','8','75s','Pull'],
-    ['sb3','DB RDL','StrengthB','Forge','Strength','hinge','Any','11','99','Any','Any','DB','3','1','1','FALSE','horizontal','hamstring|hinge','3','8','75s','Hips back'],
-    ['sb4','Push-Up','StrengthB','Forge','Strength','push','Any','11','99','Any','Any','Bodyweight','2','1','1','FALSE','upper','upper|push','3','8','60s','Line'],
-    ['sc1','Walking Lunge','StrengthC','Forge','Hypertrophy|Strength','lunge','Any','11','99','Any','Any','DB|Bodyweight','3','2','1','TRUE','horizontal','lower|single leg','2','8/side','60s','Step'],
-    ['sc2','1-Arm DB Row','StrengthC','Forge','Hypertrophy|Strength','pull','Any','11','99','Any','Any','DB','2','1','1','TRUE','upper','upper|pull','2','10/side','60s','Elbow'],
-    ['sc3','Hip Thrust','StrengthC','Forge','Strength','hinge','Any','11','99','Any','Any','Bench|Barbell','3','2','1','FALSE','horizontal','glute|hip','3','8','60s','Lockout'],
-    ['sc4','Tall Kneeling Med Ball Chest Pass','StrengthC','Power','Med Ball Power','throw','Any','11','99','Any','Any','Med Ball','2','1','1','FALSE','upper','throw|power','2','6','45s','Pop'],
-    ['ar1','Copenhagen Side Plank','Armor','Armor','Armor','adductor','Soccer|Hockey|Football|Any','13','99','Intermediate|Advanced|Any','Any','Bodyweight','2','2','1','TRUE','lateral','groin|adductor','2','15s/side','30s','Long'],
-    ['ar2','Tibialis Raise','Armor','Armor','Armor','tibialis','Any','11','99','Any','Any','Wall','1','1','1','FALSE','lower','shin|ankle','2','12','30s','Lift'],
-    ['ar3','Band External Rotation','Armor','Armor','Armor','rotator cuff','Baseball|Volleyball|Basketball|Any','11','99','Any','Any','Band','1','1','1','TRUE','upper','shoulder|rotator cuff','2','12/side','30s','Smooth'],
-    ['ar4','Neck Iso Series','Armor','Armor','Armor','neck','Football|Wrestling|Any','13','99','Any','Any','Bodyweight','1','1','1','FALSE','upper','neck','2','10s each','30s','Brace'],
-    ['ar5','Soleus ISO Hold','Armor','Armor','Armor','calf','Basketball|Soccer|Track|Any','11','99','Any','Any','Bodyweight','1','1','1','FALSE','lower','soleus|ankle','2','20s','30s','Press']
+    e_('A-Skip March','prep','Velocity','Acceleration|Max Velocity','All','All','All','Mobility','Total','Low','1','4','Sprint Mechanics|Hip Flexor'),
+    e_('Wall Drill Switch','prep','Velocity','Acceleration','All','All','All','Acceleration','Total','Low','2','5','Sprint Mechanics'),
+    e_('Pogo Jump','prep|speed_power','Velocity|Power','Elasticity|Max Velocity','All','All','All','Elasticity','Lower','Low','2','5','Foot/Ankle|Tibialis'),
+    e_('Snap Down to Stick','prep|speed_power','Power|Armor','Power|Elasticity','All','All','All','Landing','Lower','Low','1','5','Landing|Patellar Tendon'),
+    e_('Falling Start','speed_power','Velocity','Acceleration','All','All','All','Acceleration','Total','High','2','5','Sprint Mechanics'),
+    e_('Three Point Start','speed_power','Velocity','Acceleration','Football|Track|General','High School|College|Adult','Intermediate|Advanced|Elite','Acceleration','Total','High','3','5','Sprint Mechanics'),
+    e_('Wicket Run','speed_power','Velocity','Max Velocity','Track|Football|Soccer|General','High School|College|Adult','Intermediate|Advanced|Elite','Max Velocity','Total','High','3','5','Sprint Mechanics|Elasticity'),
+    e_('Broad Jump','speed_power','Power|Velocity','Power|Acceleration','All','All','All','Jump','Lower','High','2','5','Horizontal Power'),
+    e_('Box Jump','speed_power','Power','Power','All','All','All','Jump','Lower','High','2','4','Triple Extension'),
+    e_('Med Ball Chest Pass','speed_power','Power','Power','All','All','All','Med Ball','Upper','Moderate','1','4','Upper Push'),
+    e_('Med Ball Scoop Toss','speed_power','Power','Power|Acceleration','All','All','All','Med Ball','Total','Moderate','2','5','Rotational Power'),
+    e_('Goblet Squat','strength','Forge','Strength','All','All','All','Squat','Lower','Moderate','1','5','Knee Dominant'),
+    e_('Front Squat','strength','Forge','Strength|Power','All','High School|College|Adult','Intermediate|Advanced|Elite','Squat','Lower','High','3','5','Knee Dominant'),
+    e_('Trap Bar Deadlift','strength','Forge|Power','Strength|Power','All','High School|College|Adult','Beginner|Intermediate|Advanced|Elite','Hinge','Lower','High','2','5','Triple Extension|Posterior Chain'),
+    e_('DB RDL','strength','Forge','Strength','All','All','All','Hinge','Lower','Moderate','2','5','Hamstring|Posterior Chain'),
+    e_('Single-Leg RDL','strength','Forge|Armor','Strength','All','All','All','Hinge','Lower','Moderate','2','5','Hamstring|Hip'),
+    e_('RFESS','strength','Forge','Strength','All','High School|College|Adult','Intermediate|Advanced|Elite','Unilateral Knee','Lower','High','3','5','Knee Dominant'),
+    e_('Walking Lunge','strength','Forge','Strength','All','All','All','Unilateral Knee','Lower','Moderate','2','4','Hip|Groin'),
+    e_('Push-Up','strength','Forge','Strength','All','All','All','Upper Push','Upper','Moderate','1','4','Shoulder'),
+    e_('DB Bench Press','strength','Forge','Strength','All','High School|College|Adult','Beginner|Intermediate|Advanced|Elite','Upper Push','Upper','Moderate','2','5','Upper Push'),
+    e_('Half-Kneeling Landmine Press','strength','Forge|Armor','Strength|Power','All','All','All','Upper Push','Upper','Moderate','2','5','Shoulder|Trunk'),
+    e_('Pull-Up','strength','Forge','Strength','All','High School|College|Adult','Intermediate|Advanced|Elite','Upper Pull','Upper','High','3','5','Upper Pull'),
+    e_('Inverted Row','strength','Forge','Strength','All','All','All','Upper Pull','Upper','Moderate','1','5','Upper Pull|Scap'),
+    e_('1-Arm DB Row','strength','Forge','Strength','All','All','All','Upper Pull','Upper','Moderate','1','5','Scap'),
+    e_('Farmer Carry','strength|armor','Forge|Armor','Strength','All','All','All','Carry','Total','Moderate','1','5','Grip|Trunk'),
+    e_('Pallof Press','armor','Armor','Strength','All','All','All','Trunk','Total','Low','1','5','Trunk'),
+    e_('Copenhagen Plank','armor','Armor','Strength','Football|Soccer|Basketball|General','Middle School|High School|College|Adult','Intermediate|Advanced|Elite','Groin','Lower','Low','3','5','Groin|Adductor'),
+    e_('Tibialis Raise','armor','Armor','Elasticity','All','All','All','Tibialis','Lower','Low','1','5','Tibialis|Foot/Ankle'),
+    e_('Soleus ISO Hold','armor','Armor','Elasticity','Basketball|Soccer|Track|General','All','All','Soleus','Lower','Low','1','5','Soleus|Ankle'),
+    e_('Band External Rotation','armor','Armor','Strength','Baseball|Volleyball|Basketball|General','All','All','Rotator Cuff','Upper','Low','1','5','Rotator Cuff|Shoulder'),
+    e_('Neck ISO Series','armor','Armor','Strength','Football|Wrestling|General','High School|College|Adult','All','Neck','Upper','Low','1','5','Neck'),
+    e_('Dead Bug','armor|prep','Armor','Strength','All','All','All','Trunk','Total','Low','1','5','Trunk')
   ];
 }
 
-function JMAC_seedSolutionRows_() {
-  return [
-    JMAC.DATABASE_HEADERS.SOLUTIONS,
-    ['sol1','Football','HS','Offseason','Acceleration','Velocity','High','hinge|sprint|neck','72','neck','Acceleration and contact prep'],
-    ['sol2','Basketball','HS','Offseason','Elastic Power','Power','High','jump|landing|soleus','68','soleus','Elastic repeat power and landing'],
-    ['sol3','Soccer','HS','Offseason','Max Velocity','Velocity','High','sprint|adductor|hamstring','66','adductor','Sprint exposure with groin armor'],
-    ['sol4','Baseball','HS','Offseason','Med Ball Power','Power','Medium','throw|scap|rotator cuff','58','rotator cuff','Rotational power and shoulder armor'],
-    ['sol5','Track','HS','Offseason','Max Velocity','Velocity','High','sprint|elastic|hamstring','70','hamstring','Speed and elastic stiffness'],
-    ['sol6','Any','Any','Any','Any','Any','Medium','squat|hinge|push|pull|armor','60','','General performance solution']
-  ];
+function e_(Exercise, BlockType, Ecosystem, TrainingMetric, Sport, AgeGroup, Experience, Pattern, Region, CNSLabel, Complexity, CoachRank, Tags) {
+  var cnsMap = { Low: 1, Moderate: 3, High: 5 };
+  return {
+    Exercise: Exercise,
+    BlockType: BlockType,
+    Ecosystem: Ecosystem,
+    TrainingMetric: TrainingMetric,
+    Sport: Sport,
+    AgeGroup: AgeGroup,
+    Experience: Experience,
+    Phase: 'All|Offseason|Preseason|Inseason|Postseason',
+    Pattern: Pattern,
+    Region: Region,
+    CNS: cnsMap[CNSLabel] || 3,
+    Complexity: Complexity,
+    CoachRank: CoachRank,
+    Tags: Tags,
+    Notes: ''
+  };
 }

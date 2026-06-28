@@ -1,37 +1,26 @@
 /**
- * JMAC Performance OS — Dashboard.gs
- * Version: v3.0.0-alpha.1
+ * JMAC Performance OS v3.0.0-alpha.2
+ * File: Dashboard.gs
  */
-
-function JMAC_buildDashboard() {
-  const sh = JMAC_resetSheet_(JMAC.SHEETS.DASHBOARD);
+function JMAC_writeDashboard(program) {
+  var sh = JMAC_clearSheet_(JMAC_getOrCreateSheet_(JMAC.SHEETS.DASHBOARD));
   sh.setHiddenGridlines(true);
-  sh.getRange('A1:F1').merge().setValue('JMAC PERFORMANCE OS — COACH DASHBOARD').setFontSize(16).setFontWeight('bold');
+  sh.getRange('A1:F1').merge().setValue('Coach Dashboard').setFontSize(18).setFontWeight('bold').setBackground('#111827').setFontColor('#ffffff').setHorizontalAlignment('center');
   sh.getRange('A3:B8').setValues([
-    ['Version', JMAC.VERSION],
-    ['Status', 'Installed'],
-    ['Last Compose', ''],
-    ['Training Days', ''],
-    ['Weekly Stress', ''],
-    ['Validation Issues', '']
+    ['Version', program.version],
+    ['Generated', program.generatedAt],
+    ['Days', program.days.length],
+    ['Validation', program.validation.isValid ? 'PASS' : 'CHECK'],
+    ['Issues', program.validation.issueCount],
+    ['Weekly Stress', program.weeklyStress.total]
   ]);
   sh.getRange('A3:A8').setFontWeight('bold');
-  sh.autoResizeColumns(1, 6);
-}
-
-function JMAC_writeDashboard_(program, validation) {
-  const sh = JMAC_sheet_(JMAC.SHEETS.DASHBOARD);
-  if (sh.getLastRow() < 1) JMAC_buildDashboard();
-  sh.getRange('B5').setValue(new Date());
-  sh.getRange('B6').setValue(program.days.length);
-  sh.getRange('B7').setValue(program.weeklyStress ? program.weeklyStress.total : '');
-  sh.getRange('B8').setValue(validation.issues.length);
-  let row = 10;
-  sh.getRange(row,1,1,4).setValues([['Day','Theme','Metric','Stress']]).setFontWeight('bold');
+  var row = 10;
+  sh.getRange(row, 1, 1, 4).setValues([['Day', 'Theme', 'Focus', 'Stress']]).setFontWeight('bold').setBackground('#e5e7eb');
   row++;
-  if (program.weeklyStress && program.weeklyStress.byDay.length) {
-    const rows = program.weeklyStress.byDay.map(d => [d.day, d.theme, program.days[d.day - 1].metric, d.stress]);
-    sh.getRange(row,1,rows.length,4).setValues(rows);
-  }
+  (program.weeklyStress.byDay || []).forEach(function (d) {
+    sh.getRange(row, 1, 1, 4).setValues([[d.day, d.theme, JMAC_classifyTheme_(d.theme), d.stress]]);
+    row++;
+  });
   sh.autoResizeColumns(1, 6);
 }

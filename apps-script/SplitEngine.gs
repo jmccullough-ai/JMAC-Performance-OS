@@ -1,29 +1,32 @@
 /**
- * JMAC Performance OS — SplitEngine.gs
- * Version: v3.0.0-alpha.1
+ * JMAC Performance OS v3.0.0-alpha.2
+ * File: SplitEngine.gs
+ * Purpose: Generate day themes for 1-4 day programming.
  */
+function JMAC_getSplit(trainingDays) {
+  var days = Math.max(1, Math.min(4, JMAC_toInt_(trainingDays, 4)));
+  return JMAC.SPLITS[days].map(function (theme, index) {
+    return {
+      day: index + 1,
+      theme: theme,
+      focus: JMAC_classifyTheme_(theme),
+      bodyRegion: JMAC_classifyRegion_(theme)
+    };
+  });
+}
 
-function JMAC_getSplit_(controls) {
-  const days = JMAC_clamp_(JMAC_int_(controls.trainingDays, 4), 1, 4);
-  const splits = {
-    1: [
-      { day: 1, theme: 'Total Body Performance', emphasis: 'Blend', body: 'Total' }
-    ],
-    2: [
-      { day: 1, theme: 'Full Body Acceleration', emphasis: 'Acceleration', body: 'Total' },
-      { day: 2, theme: 'Full Body Max Velocity', emphasis: 'Max Velocity', body: 'Total' }
-    ],
-    3: [
-      { day: 1, theme: 'Lower Strength', emphasis: 'Acceleration', body: 'Lower' },
-      { day: 2, theme: 'Upper Strength', emphasis: 'Upper Power', body: 'Upper' },
-      { day: 3, theme: 'Total Body Power', emphasis: 'Elastic Power', body: 'Total' }
-    ],
-    4: [
-      { day: 1, theme: 'Lower Strength', emphasis: 'Acceleration', body: 'Lower' },
-      { day: 2, theme: 'Upper Strength', emphasis: 'Upper Power', body: 'Upper' },
-      { day: 3, theme: 'Lower Power', emphasis: 'Max Velocity', body: 'Lower' },
-      { day: 4, theme: 'Upper Power', emphasis: 'Med Ball Power', body: 'Upper' }
-    ]
-  };
-  return splits[days];
+function JMAC_classifyTheme_(theme) {
+  var t = JMAC_norm_(theme);
+  if (t.indexOf('acceleration') >= 0) return 'Acceleration';
+  if (t.indexOf('max velocity') >= 0) return 'Max Velocity';
+  if (t.indexOf('power') >= 0) return 'Power';
+  if (t.indexOf('strength') >= 0) return 'Strength';
+  return 'Performance';
+}
+
+function JMAC_classifyRegion_(theme) {
+  var t = JMAC_norm_(theme);
+  if (t.indexOf('upper') >= 0) return 'Upper';
+  if (t.indexOf('lower') >= 0) return 'Lower';
+  return 'Total';
 }

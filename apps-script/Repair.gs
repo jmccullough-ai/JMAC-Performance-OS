@@ -1,23 +1,21 @@
 /**
- * JMAC Performance OS — Repair.gs
- * Version: v3.0.0-alpha.1
+ * JMAC Performance OS v3.0.0-alpha.2
+ * File: Repair.gs
+ * Purpose: Basic auto-repair pass. Alpha.2 prioritizes no empty blocks.
  */
-
-function JMAC_repairProgram_(program, validation) {
-  const fallback = JMAC_tableObjects_(JMAC.SHEETS.EXERCISES);
-  program.days.forEach(day => {
-    JMAC.SESSION_BLOCKS.forEach(blockName => {
-      let block = day.blocks.find(b => b.block === blockName);
-      if (!block) {
-        block = { block: blockName, exercises: [] };
-        day.blocks.push(block);
-      }
-      if (!block.exercises || block.exercises.length < 1) {
-        const ex = fallback.find(e => String(e.block) === blockName) || fallback[0];
-        if (ex) block.exercises = [ex];
-      }
+function JMAC_repairProgram(program, validation) {
+  var fallback = {
+    slot: 'RX',
+    exercise: 'Coach Selected Replacement',
+    pattern: 'General',
+    setsReps: '2-3 x 6-8',
+    notes: 'Auto-repair fallback. Add more database rows for stronger selection.'
+  };
+  (program.days || []).forEach(function (day) {
+    (day.blocks || []).forEach(function (block) {
+      if (!block.exercises || !block.exercises.length) block.exercises = [fallback];
     });
   });
-  JMAC_log_('WARN', 'Program repaired', validation);
+  program.repaired = true;
   return program;
 }
