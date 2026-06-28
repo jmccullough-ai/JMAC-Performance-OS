@@ -1,0 +1,5 @@
+rule,value
+SpeedPowerFirst,TRUE
+ArmorEverySession,TRUE
+MaxTrainingDays,4
+NoSprintJumpFinishers,TRUE
