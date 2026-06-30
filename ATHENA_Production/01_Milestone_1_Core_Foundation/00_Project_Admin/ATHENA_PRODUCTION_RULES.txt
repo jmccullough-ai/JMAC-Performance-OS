@@ -1,0 +1,17 @@
+ATHENA Production Rules
+
+1. GitHub is the master repository.
+2. Google Apps Script is the runtime only.
+3. Every module must exist as its own downloadable .txt file.
+4. Every milestone must include:
+   - Apps Script modules
+   - INSTALL_ORDER.txt
+   - BUILD_NOTES.txt
+   - TEST_CHECKLIST.txt
+   - HANDOFF_TO_NEXT_MILESTONE.txt
+5. Every build must compile without depending on old builds.
+6. Never create Rescue, Patch, Hotfix, or Compatibility builds.
+7. Never leave duplicate functions.
+8. Never create more than one onOpen().
+9. Every milestone must be completely functional before starting the next milestone.
+10. Speed and simplicity are priorities over adding features.

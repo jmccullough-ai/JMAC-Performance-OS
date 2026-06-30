@@ -1,0 +1,70 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Milestone 1: Core Foundation
+ * Module 01: Core Config
+ *
+ * GitHub is the master repository.
+ * Google Apps Script is the runtime only.
+ */
+
+const ATHENA_PRODUCTION = {
+  appName: 'JMAC Performance OS',
+  systemName: 'ATHENA Production',
+  milestone: 'Milestone 1 - Core Foundation',
+  version: '1.0.0',
+  buildDate: '2026-06-30',
+
+  menuName: 'ATHENA Production',
+
+  sheets: {
+    home: 'HOME',
+    print: 'PRINT',
+    lookup: 'LOOKUP',
+    sportProfiles: 'SPORT_PROFILES',
+    exerciseMaster: 'EXERCISE_MASTER',
+    programRules: 'PROGRAM_RULES',
+    healthCheck: 'HEALTH_CHECK'
+  },
+
+  colors: {
+    purple: '#4B0082',
+    black: '#111111',
+    white: '#FFFFFF',
+    greyDark: '#444444',
+    greyMid: '#B7B7B7',
+    greyLight: '#F3F3F3',
+    green: '#D9EAD3',
+    red: '#F4CCCC',
+    yellow: '#FFF2CC'
+  },
+
+  fonts: {
+    primary: 'Arial'
+  }
+};
+
+function ATHENA_getConfig_() {
+  return ATHENA_PRODUCTION;
+}
+
+function ATHENA_requiredSheetNames_() {
+  const cfg = ATHENA_getConfig_();
+  return [
+    cfg.sheets.home,
+    cfg.sheets.print,
+    cfg.sheets.lookup,
+    cfg.sheets.sportProfiles,
+    cfg.sheets.exerciseMaster,
+    cfg.sheets.programRules,
+    cfg.sheets.healthCheck
+  ];
+}
+
+function ATHENA_getSpreadsheet_() {
+  return SpreadsheetApp.getActiveSpreadsheet();
+}
+
+function ATHENA_toast_(message, title) {
+  const ss = ATHENA_getSpreadsheet_();
+  ss.toast(message, title || ATHENA_PRODUCTION.systemName, 5);
+}

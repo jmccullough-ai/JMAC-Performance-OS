@@ -1,0 +1,147 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Milestone 1: Core Foundation
+ * Module 04: Data Seed
+ */
+
+function ATHENA_seedFoundationData_() {
+  ATHENA_seedLookup_();
+  ATHENA_seedSportProfiles_();
+  ATHENA_seedProgramRules_();
+  ATHENA_applyHomeValidations_();
+}
+
+function ATHENA_seedLookup_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.lookup);
+
+  const rows = [
+    ['Sport', 'Football', 1, true],
+    ['Sport', 'Basketball', 2, true],
+    ['Sport', 'Track', 3, true],
+    ['Sport', 'Soccer', 4, true],
+    ['Sport', 'Baseball', 5, true],
+    ['Sport', 'Softball', 6, true],
+    ['Sport', 'Lacrosse', 7, true],
+    ['Sport', 'Wrestling', 8, true],
+    ['Sport', 'Volleyball', 9, true],
+    ['Sport', 'Cross Country', 10, true],
+    ['Sport', 'Hockey', 11, true],
+    ['Sport', 'Golf', 12, true],
+    ['Sport', 'General Athlete', 99, true],
+
+    ['Age Group', 'Youth', 1, true],
+    ['Age Group', 'Middle School', 2, true],
+    ['Age Group', 'High School', 3, true],
+    ['Age Group', 'College', 4, true],
+    ['Age Group', 'Adult', 5, true],
+
+    ['Experience', 'Beginner', 1, true],
+    ['Experience', 'Intermediate', 2, true],
+    ['Experience', 'Advanced', 3, true],
+
+    ['Phase', 'Foundation', 1, true],
+    ['Phase', 'Accumulation', 2, true],
+    ['Phase', 'Intensification', 3, true],
+    ['Phase', 'Power', 4, true],
+    ['Phase', 'In-Season', 5, true],
+    ['Phase', 'Return to Play', 6, true],
+
+    ['Training Days', '2', 1, true],
+    ['Training Days', '3', 2, true],
+    ['Training Days', '4', 3, true],
+
+    ['Primary Goal', 'Speed', 1, true],
+    ['Primary Goal', 'Strength', 2, true],
+    ['Primary Goal', 'Power', 3, true],
+    ['Primary Goal', 'Movement Quality', 4, true],
+    ['Primary Goal', 'General Performance', 5, true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+}
+
+function ATHENA_seedSportProfiles_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.sportProfiles);
+
+  const rows = [
+    ['Football', 'Acceleration, Collision, Power', 'Change of Direction, Max Strength', 'Neck, Hamstrings, Groin, Tibialis', 'Acceleration', 'Total Body Strength', 'Triple Extension', 'Neck / Groin / Hamstrings', true],
+    ['Basketball', 'Elasticity, Landing, Deceleration', 'Acceleration, Lateral Movement', 'Patellar Tendon, Soleus, Landing', 'Multi-Directional Speed', 'Unilateral Strength', 'Elastic Power', 'Knee / Ankle / Landing', true],
+    ['Track', 'Acceleration, Max Velocity, Elasticity', 'Power, Stiffness, Posture', 'Hamstrings, Hip Flexor, Foot', 'Sprint Mechanics', 'Posterior Chain Strength', 'Elastic Power', 'Hamstring / Foot / Hip', true],
+    ['Soccer', 'Repeated Sprint, COD, Aerobic Support', 'Groin Strength, Deceleration', 'Groin, Adductors, Hamstrings', 'COD / Repeated Sprint', 'Unilateral Strength', 'Lateral Power', 'Groin / Hamstring / Ankle', true],
+    ['Baseball', 'Rotational Power, Sprint Burst', 'Shoulder Health, Hip Power', 'Rotator Cuff, Scap, Forearm', 'Acceleration', 'Total Body Strength', 'Rotational Power', 'Shoulder / Forearm / Hip', true],
+    ['Softball', 'Rotational Power, Sprint Burst', 'Shoulder Health, Hip Power', 'Rotator Cuff, Scap, Forearm', 'Acceleration', 'Total Body Strength', 'Rotational Power', 'Shoulder / Forearm / Hip', true],
+    ['Lacrosse', 'Acceleration, COD, Contact', 'Repeated Sprint, Rotation', 'Ankle, Groin, Shoulder', 'COD / Acceleration', 'Total Body Strength', 'Rotational Power', 'Groin / Ankle / Shoulder', true],
+    ['Wrestling', 'Grip, Trunk, Total Body Strength', 'Power Endurance, Mobility', 'Neck, Shoulder, Knee', 'Mat Speed', 'Total Body Strength', 'Explosive Strength', 'Neck / Shoulder / Trunk', true],
+    ['Volleyball', 'Elasticity, Jumping, Landing', 'Shoulder Health, Lateral Movement', 'Patellar Tendon, Shoulder, Ankle', 'Approach / Lateral', 'Unilateral Strength', 'Jump Power', 'Knee / Shoulder / Ankle', true],
+    ['Cross Country', 'Rhythm, Tissue Capacity, Posture', 'Foot Strength, Hip Stability', 'Foot, Tibialis, Hip', 'Running Mechanics', 'General Strength', 'Low-Level Elasticity', 'Foot / Hip / Trunk', true],
+    ['Hockey', 'Lateral Power, Acceleration, Contact', 'Groin Strength, Rotation', 'Groin, Hip, Adductors', 'Lateral Acceleration', 'Unilateral Strength', 'Lateral Power', 'Groin / Hip / Trunk', true],
+    ['Golf', 'Rotation, Mobility, Power Transfer', 'Trunk Strength, Hip Mobility', 'Low Back, Hip, Shoulder', 'Movement Quality', 'Trunk Strength', 'Rotational Power', 'Hip / Shoulder / Trunk', true],
+    ['General Athlete', 'Movement Quality, Speed, Strength', 'Power, Armor', 'General Tissue Capacity', 'Acceleration', 'Total Body Strength', 'General Power', 'General Armor', true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+}
+
+function ATHENA_seedProgramRules_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.programRules);
+
+  const rows = [
+    ['RULE_001', 'Session Order', 'Speed Power First', 'TRUE', 'Speed, elastic, plyometric, explosive, and Olympic-type work belongs early.', true],
+    ['RULE_002', 'Session Order', 'No Sprint Jump Finishers', 'TRUE', 'Do not place sprinting or jumping at the end as finishers.', true],
+    ['RULE_003', 'Session Requirement', 'Armor Every Session', 'TRUE', 'Every generated workout must include armor/prehab/tissue capacity.', true],
+    ['RULE_004', 'Strength Structure', 'Three Strength Blocks', 'TRUE', 'Workout generator will eventually create A/B/C strength blocks.', true],
+    ['RULE_005', 'Production Rule', 'GitHub Master', 'TRUE', 'GitHub is the master repository. Apps Script is runtime only.', true],
+    ['RULE_006', 'Production Rule', 'Single onOpen', 'TRUE', 'Only Module 02 may contain onOpen().', true],
+    ['RULE_007', 'Production Rule', 'No Prototype Dependency', 'TRUE', 'Milestone must compile without old v2/v3 builds.', true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+}
+
+function ATHENA_applyHomeValidations_() {
+  const ss = ATHENA_getSpreadsheet_();
+  const home = ss.getSheetByName(ATHENA_PRODUCTION.sheets.home);
+  const lookup = ss.getSheetByName(ATHENA_PRODUCTION.sheets.lookup);
+
+  const categoryRows = ATHENA_getLookupValuesByCategory_(lookup);
+
+  ATHENA_setDropdown_(home.getRange('B5'), categoryRows['Sport']);
+  ATHENA_setDropdown_(home.getRange('B6'), categoryRows['Age Group']);
+  ATHENA_setDropdown_(home.getRange('B7'), categoryRows['Experience']);
+  ATHENA_setDropdown_(home.getRange('B8'), categoryRows['Phase']);
+  ATHENA_setDropdown_(home.getRange('B9'), categoryRows['Training Days']);
+  ATHENA_setDropdown_(home.getRange('B10'), categoryRows['Primary Goal']);
+
+  home.getRange('B5').setValue('General Athlete');
+  home.getRange('B6').setValue('High School');
+  home.getRange('B7').setValue('Beginner');
+  home.getRange('B8').setValue('Foundation');
+  home.getRange('B9').setValue('3');
+  home.getRange('B10').setValue('General Performance');
+}
+
+function ATHENA_getLookupValuesByCategory_(lookupSheet) {
+  const lastRow = lookupSheet.getLastRow();
+  const data = lookupSheet.getRange(2, 1, Math.max(lastRow - 1, 1), 4).getValues();
+  const output = {};
+
+  data.forEach(function(row) {
+    const category = row[0];
+    const value = row[1];
+    const active = row[3];
+    if (!category || !value || active !== true) return;
+    if (!output[category]) output[category] = [];
+    output[category].push(value);
+  });
+
+  return output;
+}
+
+function ATHENA_setDropdown_(range, values) {
+  if (!values || values.length === 0) return;
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(values, true)
+    .setAllowInvalid(false)
+    .build();
+  range.setDataValidation(rule);
+}

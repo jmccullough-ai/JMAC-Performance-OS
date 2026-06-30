@@ -1,0 +1,40 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Milestone 1: Core Foundation
+ * Module 02: Menu
+ *
+ * This is the only allowed onOpen() in ATHENA Production.
+ */
+
+function onOpen() {
+  ATHENA_buildMenu_();
+}
+
+function ATHENA_buildMenu_() {
+  SpreadsheetApp.getUi()
+    .createMenu(ATHENA_PRODUCTION.menuName)
+    .addItem('Install Milestone 1', 'ATHENA_installMilestone1')
+    .addItem('Run Health Check', 'ATHENA_runHealthCheck')
+    .addSeparator()
+    .addItem('Go to HOME', 'ATHENA_goToHome')
+    .addItem('Go to PRINT', 'ATHENA_goToPrint')
+    .addToUi();
+}
+
+function ATHENA_goToHome() {
+  ATHENA_goToSheet_(ATHENA_PRODUCTION.sheets.home);
+}
+
+function ATHENA_goToPrint() {
+  ATHENA_goToSheet_(ATHENA_PRODUCTION.sheets.print);
+}
+
+function ATHENA_goToSheet_(sheetName) {
+  const ss = ATHENA_getSpreadsheet_();
+  const sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    ATHENA_toast_('Sheet not found: ' + sheetName, 'ATHENA Production');
+    return;
+  }
+  ss.setActiveSheet(sheet);
+}

@@ -1,0 +1,63 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Milestone 1: Core Foundation
+ * Module 05: Health Check
+ */
+
+function ATHENA_runHealthCheck() {
+  const ss = ATHENA_getSpreadsheet_();
+  const health = ss.getSheetByName(ATHENA_PRODUCTION.sheets.healthCheck) || ss.insertSheet(ATHENA_PRODUCTION.sheets.healthCheck);
+  const results = [];
+
+  ATHENA_requiredSheetNames_().forEach(function(sheetName) {
+    const exists = ss.getSheetByName(sheetName) !== null;
+    results.push([
+      'Required sheet exists: ' + sheetName,
+      exists ? 'PASS' : 'FAIL',
+      exists ? 'Found' : 'Missing'
+    ]);
+  });
+
+  results.push(ATHENA_checkHeader_(ss, ATHENA_PRODUCTION.sheets.lookup, ['Category', 'Value', 'Sort_Order', 'Active']));
+  results.push(ATHENA_checkHeader_(ss, ATHENA_PRODUCTION.sheets.sportProfiles, ['Sport', 'Primary_Demands', 'Secondary_Demands', 'Common_Injury_Bias', 'Speed_Bias', 'Strength_Bias', 'Power_Bias', 'Armor_Bias', 'Active']));
+  results.push(ATHENA_checkHeader_(ss, ATHENA_PRODUCTION.sheets.exerciseMaster, ['Exercise_ID', 'Exercise_Name', 'Category', 'Pattern', 'Plane', 'Primary_Quality', 'Secondary_Quality', 'Equipment', 'Age_Min', 'Experience_Min', 'CNS_Level', 'Complexity', 'Coach_Tag', 'Active']));
+  results.push(ATHENA_checkHeader_(ss, ATHENA_PRODUCTION.sheets.programRules, ['Rule_ID', 'Rule_Type', 'Rule_Name', 'Rule_Value', 'Notes', 'Active']));
+
+  const passCount = results.filter(function(row) { return row[1] === 'PASS'; }).length;
+  const failCount = results.filter(function(row) { return row[1] === 'FAIL'; }).length;
+
+  health.clear();
+  ATHENA_buildHealthCheckSheet_(health);
+  health.getRange(5, 1, results.length, 3).setValues(results);
+  health.getRange(5, 1, results.length, 3).setBorder(true, true, true, true, true, true);
+
+  for (let i = 0; i < results.length; i++) {
+    const statusCell = health.getRange(5 + i, 2);
+    if (results[i][1] === 'PASS') {
+      statusCell.setBackground(ATHENA_PRODUCTION.colors.green);
+    } else {
+      statusCell.setBackground(ATHENA_PRODUCTION.colors.red);
+    }
+  }
+
+  health.getRange('A2:H2').setValue('PASS: ' + passCount + ' | FAIL: ' + failCount + ' | Version: ' + ATHENA_PRODUCTION.version);
+  ATHENA_toast_('Health Check Complete — PASS: ' + passCount + ' FAIL: ' + failCount, 'ATHENA Production');
+}
+
+function ATHENA_checkHeader_(ss, sheetName, expectedHeaders) {
+  const sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    return ['Header check: ' + sheetName, 'FAIL', 'Sheet missing'];
+  }
+
+  const actualHeaders = sheet.getRange(1, 1, 1, expectedHeaders.length).getValues()[0];
+  const matches = expectedHeaders.every(function(header, index) {
+    return actualHeaders[index] === header;
+  });
+
+  return [
+    'Header check: ' + sheetName,
+    matches ? 'PASS' : 'FAIL',
+    matches ? 'Headers match' : 'Expected: ' + expectedHeaders.join(', ')
+  ];
+}

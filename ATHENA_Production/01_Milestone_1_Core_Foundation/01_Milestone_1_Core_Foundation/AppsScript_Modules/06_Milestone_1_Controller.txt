@@ -1,0 +1,17 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Milestone 1: Core Foundation
+ * Module 06: Milestone 1 Controller
+ */
+
+function ATHENA_installMilestone1() {
+  ATHENA_buildFoundationSheets_();
+  ATHENA_seedFoundationData_();
+  ATHENA_runHealthCheck();
+  ATHENA_goToHome();
+
+  ATHENA_toast_(
+    'Milestone 1 installed. Foundation sheets, seed data, dropdowns, and health check are complete.',
+    'ATHENA Production'
+  );
+}
