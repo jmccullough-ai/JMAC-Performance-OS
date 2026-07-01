@@ -1,6 +1,6 @@
 /**
  * JMAC Performance OS — ATHENA Production
- * Release 1.0.0 — Sheet Builder
+ * Release 1.0.1 — Sheet Builder
  */
 
 function ATHENA_buildFoundationSheets_() {
@@ -22,16 +22,16 @@ function ATHENA_buildFoundationSheets_() {
   ATHENA_buildProgressionMapSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.progressionMap));
   ATHENA_buildExerciseMasterSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.exerciseMaster));
   ATHENA_buildProgramRulesSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.programRules));
+  ATHENA_buildTemplatesSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.templates));
   ATHENA_buildHealthCheckSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.healthCheck));
 }
 
 function ATHENA_createOrClearSheet_(ss, sheetName) {
   let sheet = ss.getSheetByName(sheetName);
-  if (!sheet) {
-    sheet = ss.insertSheet(sheetName);
-  }
+  if (!sheet) sheet = ss.insertSheet(sheetName);
 
   sheet.clear();
+  sheet.clearDataValidations();
   sheet.clearConditionalFormatRules();
   sheet.setFrozenRows(0);
   sheet.setFrozenColumns(0);
@@ -83,7 +83,7 @@ function ATHENA_title_(sheet, title, subtitle) {
 
 function ATHENA_buildHomeSheet_(sheet) {
   ATHENA_baseFormat_(sheet);
-  ATHENA_title_(sheet, 'JMAC Performance OS', 'ATHENA Production — Release 1.0.0 Core Foundation');
+  ATHENA_title_(sheet, 'JMAC Performance OS', 'ATHENA Production — Release 1.0.1 Verified Baseline');
 
   const controls = [
     ['Program Control', 'Selection', 'Notes'],
@@ -97,15 +97,15 @@ function ATHENA_buildHomeSheet_(sheet) {
     ['Primary Goal', '', 'Main program outcome.'],
     ['Print Header Text', 'JMAC PERFORMANCE OS', 'Editable. Main PRINT header.'],
     ['Training Days Count', '', 'Auto-calculated from weekly calendar.'],
-    ['Schedule Pattern', '', 'Auto-calculated. Example: Spaced / Compressed.'],
-    ['Status', 'Release 1.0.0 Installed', 'Foundation only. Workout generation begins later.']
+    ['Schedule Pattern', '', 'Auto-calculated from weekly calendar.'],
+    ['Status', 'Release 1.0.1 Installed', 'Foundation only. Workout generation begins later.']
   ];
 
   sheet.getRange(4, 1, controls.length, 3).setValues(controls);
   ATHENA_styleHeader_(sheet.getRange(4, 1, 1, 3));
   sheet.getRange(5, 1, controls.length - 1, 3).setBorder(true, true, true, true, true, true);
 
-  const calendarStart = 20;
+  const calendarStart = ATHENA_PRODUCTION.home.weeklyCalendarStartRow - 1;
   const calendar = [
     ['Weekly Training Calendar', 'Train?', 'Auto CNS Type', 'Auto Split Theme', 'Auto Speed/Power Theme', 'Auto Strength Theme', 'Notes'],
     ['Monday', true, '', '', '', '', ''],
@@ -123,7 +123,7 @@ function ATHENA_buildHomeSheet_(sheet) {
   sheet.getRange(calendarStart + 1, 2, 7, 1).insertCheckboxes();
 
   sheet.setColumnWidth(1, 190);
-  sheet.setColumnWidth(2, 120);
+  sheet.setColumnWidth(2, 130);
   sheet.setColumnWidth(3, 180);
   sheet.setColumnWidth(4, 220);
   sheet.setColumnWidth(5, 230);
@@ -161,7 +161,6 @@ function ATHENA_buildPrintSheet_(sheet) {
   sheet.getRange(4, 1, rows.length, 3).setValues(rows);
   ATHENA_styleHeader_(sheet.getRange(4, 1, 1, 3));
   sheet.getRange(5, 1, rows.length - 1, 3).setBorder(true, true, true, true, true, true);
-
   sheet.setColumnWidths(1, 8, 120);
   sheet.setRowHeight(1, 34);
   sheet.setRowHeight(2, 42);
@@ -223,9 +222,17 @@ function ATHENA_buildProgramRulesSheet_(sheet) {
   sheet.setFrozenRows(1);
 }
 
+function ATHENA_buildTemplatesSheet_(sheet) {
+  ATHENA_baseFormat_(sheet);
+  const headers = ['Saved_At', 'Program_Title', 'Facility_Team', 'Coach_Name', 'Sport', 'Gender', 'Athlete_Level', 'Phase', 'Primary_Goal', 'Training_Days', 'Schedule_Pattern'];
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  ATHENA_styleHeader_(sheet.getRange(1, 1, 1, headers.length));
+  sheet.setFrozenRows(1);
+}
+
 function ATHENA_buildHealthCheckSheet_(sheet) {
   ATHENA_baseFormat_(sheet);
-  ATHENA_title_(sheet, 'ATHENA Production Health Check', 'Release 1.0.0 Validation');
+  ATHENA_title_(sheet, 'ATHENA Production Health Check', 'Release 1.0.1 Validation');
 
   const headers = ['Check', 'Status', 'Details'];
   sheet.getRange(4, 1, 1, headers.length).setValues([headers]);

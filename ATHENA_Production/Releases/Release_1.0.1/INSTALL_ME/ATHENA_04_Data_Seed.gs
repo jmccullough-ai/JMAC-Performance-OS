@@ -1,6 +1,6 @@
 /**
  * JMAC Performance OS — ATHENA Production
- * Release 1.0.0 — Data Seed
+ * Release 1.0.1 — Data Seed
  */
 
 function ATHENA_seedFoundationData_() {
@@ -10,6 +10,7 @@ function ATHENA_seedFoundationData_() {
   ATHENA_seedProgressionMap_();
   ATHENA_seedProgramRules_();
   ATHENA_applyHomeValidations_();
+  ATHENA_seedHomeDefaults_();
   ATHENA_refreshWeeklySchedule();
   ATHENA_refreshPrintHeader();
 }
@@ -121,7 +122,8 @@ function ATHENA_seedProgramRules_() {
     ['RULE_007', 'Weekly Schedule', 'Back-to-Back Adjusts Intensity', 'TRUE', 'Back-to-back training days should adjust CNS and exercise intensity.', true],
     ['RULE_008', 'Print System', 'Editable Header', 'TRUE', 'PRINT row 1 is controlled from HOME Print Header Text.', true],
     ['RULE_009', 'Production Rule', 'GitHub Master', 'TRUE', 'GitHub is master. Apps Script is runtime only.', true],
-    ['RULE_010', 'Production Rule', 'Single onOpen', 'TRUE', 'Only Module 02 may contain onOpen().', true]
+    ['RULE_010', 'Production Rule', 'Single onOpen', 'TRUE', 'Only Module 02 may contain onOpen().', true],
+    ['RULE_011', 'Menu Workflow', 'Coach Workflow Menu', 'TRUE', 'Build Program, Print View, Save Template, and Health Check are accessible from the ATHENA Production menu.', true]
   ];
 
   sheet.getRange(2, 1, rows.length, 6).setValues(rows);
@@ -133,17 +135,23 @@ function ATHENA_applyHomeValidations_() {
   const lookup = ss.getSheetByName(ATHENA_PRODUCTION.sheets.lookup);
   const values = ATHENA_getLookupValuesByCategory_(lookup);
 
-  ATHENA_setDropdown_(home.getRange('B8'), values['Sport']);
-  ATHENA_setDropdown_(home.getRange('B9'), values['Gender']);
-  ATHENA_setDropdown_(home.getRange('B10'), values['Athlete Level']);
-  ATHENA_setDropdown_(home.getRange('B11'), values['Phase']);
-  ATHENA_setDropdown_(home.getRange('B12'), values['Primary Goal']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.sport), values['Sport']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.gender), values['Gender']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.athleteLevel), values['Athlete Level']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.phase), values['Phase']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.primaryGoal), values['Primary Goal']);
+}
 
-  home.getRange('B8').setValue('General Athlete');
-  home.getRange('B9').setValue('Mixed Group');
-  home.getRange('B10').setValue('Level 3 - Development 1');
-  home.getRange('B11').setValue('Foundation');
-  home.getRange('B12').setValue('General Performance');
+function ATHENA_seedHomeDefaults_() {
+  const home = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.home);
+  const h = ATHENA_PRODUCTION.home;
+
+  home.getRange(h.sport).setValue('General Athlete');
+  home.getRange(h.gender).setValue('Mixed Group');
+  home.getRange(h.athleteLevel).setValue('Level 3 - Development 1');
+  home.getRange(h.phase).setValue('Foundation');
+  home.getRange(h.primaryGoal).setValue('General Performance');
+  home.getRange(h.printHeader).setValue('JMAC PERFORMANCE OS');
 }
 
 function ATHENA_getLookupValuesByCategory_(lookupSheet) {

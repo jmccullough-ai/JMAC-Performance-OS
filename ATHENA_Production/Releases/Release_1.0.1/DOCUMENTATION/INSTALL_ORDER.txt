@@ -1,5 +1,4 @@
 Install order:
-
 1. ATHENA_01_Core_Config.gs
 2. ATHENA_02_Menu.gs
 3. ATHENA_03_Sheet_Builder.gs
@@ -10,7 +9,4 @@ Install order:
 8. ATHENA_08_Controller.gs
 
 Run:
-ATHENA_installRelease100
-
-After changing weekly checkboxes:
-ATHENA_refreshWeeklySchedule
+ATHENA_installRelease101

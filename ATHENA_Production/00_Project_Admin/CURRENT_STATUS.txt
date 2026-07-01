@@ -1,8 +1,3 @@
-Current Release:
-Release 1.0.0 — Production Baseline
+Current Release: Release 1.0.1 — Verified Baseline
 
-Status:
-Generated cleanly.
-
-Installer:
-ATHENA_installRelease100
+Installer: ATHENA_installRelease101

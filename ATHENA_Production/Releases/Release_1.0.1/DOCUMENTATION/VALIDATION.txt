@@ -1,8 +1,6 @@
-Release 1.0.0 Validation
+Release 1.0.1 Validation
 
-Module count:
-8
-
+Module count: 8
 Expected modules:
 ATHENA_01_Core_Config.gs
 ATHENA_02_Menu.gs
@@ -23,14 +21,10 @@ ATHENA_06_Print_Header.gs
 ATHENA_07_Health_Check.gs
 ATHENA_08_Controller.gs
 
-Duplicate functions:
-None
+Duplicate functions: None
+onOpen count: 1
+Installer functions:
+ATHENA_installRelease101
+ATHENA_installRelease100 alias
 
-onOpen count:
-1
-
-Installer function:
-ATHENA_installRelease100
-
-Validation result:
-PASS
+Validation result: PASS

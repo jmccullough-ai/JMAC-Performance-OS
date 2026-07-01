@@ -1,12 +1,8 @@
 ATHENA Production Rules
 
-1. GitHub is the master repository.
-2. Google Apps Script is the runtime only.
-3. INSTALL_ME contains Apps Script .gs files.
-4. DOCUMENTATION contains read-only release documentation.
-5. Every release must compile without depending on old builds.
-6. Never create Rescue, Patch, Hotfix, or Compatibility builds.
-7. Never leave duplicate functions.
-8. Never create more than one onOpen().
-9. Every release must be completely functional before starting the next release.
-10. Speed and simplicity are priorities over adding features.
+- GitHub is master.
+- Apps Script is runtime only.
+- One onOpen only.
+- No duplicate functions.
+- Each release has INSTALL_ME and DOCUMENTATION.
+- No Rescue/Patch/Hotfix naming.

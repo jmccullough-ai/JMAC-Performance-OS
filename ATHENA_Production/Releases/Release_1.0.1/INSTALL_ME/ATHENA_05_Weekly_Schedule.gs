@@ -1,6 +1,6 @@
 /**
  * JMAC Performance OS — ATHENA Production
- * Release 1.0.0 — Weekly Schedule
+ * Release 1.0.1 — Weekly Schedule
  */
 
 function ATHENA_refreshWeeklySchedule() {
@@ -10,7 +10,8 @@ function ATHENA_refreshWeeklySchedule() {
 
   if (!home || !schedule) return;
 
-  const calendar = home.getRange(21, 1, 7, 7).getValues();
+  const startRow = ATHENA_PRODUCTION.home.weeklyCalendarStartRow;
+  const calendar = home.getRange(startRow, 1, ATHENA_PRODUCTION.home.weeklyCalendarRows, 7).getValues();
   const trainDays = calendar.map(function(row) {
     return row[1] === true;
   });
@@ -40,12 +41,12 @@ function ATHENA_refreshWeeklySchedule() {
 
   schedule.getRange(2, 1, 7, 10).setValues(output);
 
-  home.getRange('B15').setValue(trainingCount);
-  home.getRange('B16').setValue(pattern);
+  home.getRange(ATHENA_PRODUCTION.home.trainingDayCount).setValue(trainingCount);
+  home.getRange(ATHENA_PRODUCTION.home.schedulePattern).setValue(pattern);
 
   for (let i = 0; i < 7; i++) {
-    home.getRange(21 + i, 3, 1, 4).setValues([[output[i][2], output[i][3], output[i][4], output[i][5]]]);
-    home.getRange(21 + i, 7).setValue(output[i][9]);
+    home.getRange(startRow + i, 3, 1, 4).setValues([[output[i][2], output[i][3], output[i][4], output[i][5]]]);
+    home.getRange(startRow + i, 7).setValue(output[i][9]);
   }
 
   ATHENA_refreshPrintHeader();
@@ -57,16 +58,13 @@ function ATHENA_getSchedulePattern_(trainDays) {
   let backToBackPairs = 0;
 
   for (let i = 0; i < trainDays.length - 1; i++) {
-    if (trainDays[i] && trainDays[i + 1]) {
-      backToBackPairs++;
-    }
+    if (trainDays[i] && trainDays[i + 1]) backToBackPairs++;
   }
 
   if (count === 0) return 'No Training Days Selected';
   if (count === 1) return 'Single Day';
   if (backToBackPairs === 0) return 'Spaced';
   if (backToBackPairs >= count - 1) return 'Compressed / Consecutive';
-
   return 'Mixed Spacing';
 }
 
@@ -87,14 +85,11 @@ function ATHENA_assignCnsType_(trainingCount, dayNumber, prev, next, pattern) {
 
   if (prev && next) return 'Low CNS';
   if (prev) return 'Moderate CNS';
-
   return 'High CNS';
 }
 
 function ATHENA_assignSplitTheme_(trainingCount, dayNumber, prev, next, pattern) {
-  if (trainingCount === 1) {
-    return 'Total Body Performance';
-  }
+  if (trainingCount === 1) return 'Total Body Performance';
 
   if (trainingCount === 2) {
     if (pattern === 'Spaced') {
@@ -136,7 +131,6 @@ function ATHENA_assignSpeedPowerTheme_(cns, split, dayNumber) {
   if (split.indexOf('Acceleration') !== -1) return 'Acceleration / Sled Push';
   if (split.indexOf('Max Velocity') !== -1) return 'Max Velocity / Elastic';
   if (split.indexOf('Power') !== -1) return 'Jumps / Throws / Olympic Derivative';
-
   return dayNumber % 2 === 1 ? 'Acceleration / Plyo' : 'Elastic / Med Ball';
 }
 
@@ -145,7 +139,6 @@ function ATHENA_assignStrengthTheme_(split) {
   if (split.indexOf('Upper') !== -1) return 'Upper Strength';
   if (split.indexOf('Power') !== -1) return 'Total Body Power';
   if (split.indexOf('Low') !== -1) return 'Armor / Tissue Capacity';
-
   return 'Total Body Strength';
 }
 
@@ -153,6 +146,5 @@ function ATHENA_assignSpacingLabel_(prev, next) {
   if (prev && next) return 'Middle of Back-to-Back';
   if (prev) return 'After Training Day';
   if (next) return 'Before Training Day';
-
   return 'Rest-Spaced';
 }

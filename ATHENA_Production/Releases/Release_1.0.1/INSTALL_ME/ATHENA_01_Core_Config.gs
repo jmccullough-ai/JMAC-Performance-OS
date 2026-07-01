@@ -1,16 +1,13 @@
 /**
  * JMAC Performance OS — ATHENA Production
- * Release 1.0.0 — Core Config
- *
- * GitHub is the master repository.
- * Google Apps Script is the runtime only.
+ * Release 1.0.1 — Core Config
  */
 
 const ATHENA_PRODUCTION = {
   appName: 'JMAC Performance OS',
   systemName: 'ATHENA Production',
-  release: 'Release 1.0.0',
-  version: '1.0.0',
+  release: 'Release 1.0.1',
+  version: '1.0.1',
   buildDate: '2026-07-01',
   menuName: 'ATHENA Production',
 
@@ -24,7 +21,24 @@ const ATHENA_PRODUCTION = {
     progressionMap: 'PROGRESSION_MAP',
     exerciseMaster: 'EXERCISE_MASTER',
     programRules: 'PROGRAM_RULES',
+    templates: 'TEMPLATES',
     healthCheck: 'HEALTH_CHECK'
+  },
+
+  home: {
+    programTitle: 'B5',
+    facilityTeam: 'B6',
+    coachName: 'B7',
+    sport: 'B8',
+    gender: 'B9',
+    athleteLevel: 'B10',
+    phase: 'B11',
+    primaryGoal: 'B12',
+    printHeader: 'B13',
+    trainingDayCount: 'B15',
+    schedulePattern: 'B16',
+    weeklyCalendarStartRow: 21,
+    weeklyCalendarRows: 7
   },
 
   colors: {
@@ -56,12 +70,19 @@ function ATHENA_requiredSheetNames_() {
     s.progressionMap,
     s.exerciseMaster,
     s.programRules,
+    s.templates,
     s.healthCheck
   ];
 }
 
 function ATHENA_getSpreadsheet_() {
   return SpreadsheetApp.getActiveSpreadsheet();
+}
+
+function ATHENA_getHomeRange_(fieldName) {
+  return ATHENA_getSpreadsheet_()
+    .getSheetByName(ATHENA_PRODUCTION.sheets.home)
+    .getRange(ATHENA_PRODUCTION.home[fieldName]);
 }
 
 function ATHENA_toast_(message, title) {
