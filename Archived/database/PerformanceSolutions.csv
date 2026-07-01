@@ -1,7 +1,0 @@
-id,sport,ageGroup,phase,metric,ecosystem,priority,movementQuota,stressTarget,injuryBias,notes
-sol1,Football,HS,Offseason,Acceleration,Velocity,High,hinge|sprint|neck,72,neck,Acceleration and contact prep
-sol2,Basketball,HS,Offseason,Elastic Power,Power,High,jump|landing|soleus,68,soleus,Elastic repeat power and landing
-sol3,Soccer,HS,Offseason,Max Velocity,Velocity,High,sprint|adductor|hamstring,66,adductor,Sprint exposure with groin armor
-sol4,Baseball,HS,Offseason,Med Ball Power,Power,Medium,throw|scap|rotator cuff,58,rotator cuff,Rotational power and shoulder armor
-sol5,Track,HS,Offseason,Max Velocity,Velocity,High,sprint|elastic|hamstring,70,hamstring,Speed and elastic stiffness
-sol6,Any,Any,Any,Any,Any,Medium,squat|hinge|push|pull|armor,60,,General performance solution

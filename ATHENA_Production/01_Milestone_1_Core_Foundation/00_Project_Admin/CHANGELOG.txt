@@ -1,7 +1,0 @@
-ATHENA Production Changelog
-
-2026-06-30
-- Created ATHENA Production architecture.
-- Generated Milestone 1 Core Foundation.
-- Added Hockey and Golf to sport profile foundation.
-- Created standalone module structure.
