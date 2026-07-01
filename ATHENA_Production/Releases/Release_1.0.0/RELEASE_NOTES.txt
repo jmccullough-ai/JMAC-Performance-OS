@@ -1,14 +1,3 @@
-Release 1.0.0
+Release 1.0.0 UPDATED
 
-Included:
-- Core configuration
-- Single menu/onOpen
-- HOME control panel
-- PRINT header foundation
-- LOOKUP
-- SPORT_PROFILES
-- ATHLETE_LEVELS
-- PROGRESSION_MAP
-- EXERCISE_MASTER headers
-- PROGRAM_RULES
-- HEALTH_CHECK
+Includes HOME control panel, weekly calendar, WEEKLY_SCHEDULE, print header, lookup data, sport profiles, athlete levels, progression map, exercise master headers, program rules, and health check.

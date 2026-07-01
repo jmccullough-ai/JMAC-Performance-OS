@@ -1,7 +1,6 @@
 2026-06-30
-- Created Release 1.0.0 Core Foundation.
-- Converted Age Group + Experience into Athlete Level.
-- Added Gender control.
-- Added editable print header settings.
-- Added second-row print identity strip from HOME selections.
-- Added progression families for sprinting, sleds, plyometrics, band-assisted/resisted jumps, depth drops, and Olympic/explosive work.
+- Updated Release 1.0.0.
+- Removed ecosystem controls.
+- Added HOME weekly checkbox calendar.
+- Added WEEKLY_SCHEDULE sheet.
+- Added spacing-aware split/CNS theme foundation.

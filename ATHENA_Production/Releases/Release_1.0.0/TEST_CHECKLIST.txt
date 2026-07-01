@@ -1,28 +1,15 @@
-Release 1.0.0 Test Checklist
+Run ATHENA_installRelease100.
 
-Run:
-ATHENA_installRelease100
-
-Check:
 [ ] HOME exists
-[ ] PRINT exists
-[ ] LOOKUP exists
-[ ] SPORT_PROFILES exists
-[ ] ATHLETE_LEVELS exists
-[ ] PROGRESSION_MAP exists
-[ ] EXERCISE_MASTER exists
-[ ] PROGRAM_RULES exists
-[ ] HEALTH_CHECK exists
-[ ] HOME has Gender dropdown
-[ ] HOME has Athlete Level dropdown with 6 levels
-[ ] HOME has editable Program Title
-[ ] HOME has editable Print Header Text
-[ ] PRINT row 1 copies editable header text
-[ ] PRINT row 2 copies Sport, Gender, Level, Phase, Days, Goal, Ecosystems, and Session Type
-[ ] PROGRESSION_MAP includes Sprinting
-[ ] PROGRESSION_MAP includes Sled Push / Sprint
-[ ] PROGRESSION_MAP includes Plyometrics
-[ ] PROGRESSION_MAP includes Band Assisted / Resisted Jumps
-[ ] PROGRESSION_MAP includes Depth Drop / Shock
-[ ] PROGRESSION_MAP includes Olympic / Explosive
+[ ] WEEKLY_SCHEDULE exists
+[ ] HOME does not have ecosystem controls
+[ ] HOME has Monday-Sunday checkboxes
+[ ] Default checked days are Monday, Wednesday, Friday
+[ ] Training Days Count shows 3
+[ ] Schedule Pattern shows Spaced
+[ ] Change checkboxes to Monday, Tuesday, Wednesday
+[ ] Run ATHENA_refreshWeeklySchedule
+[ ] Schedule Pattern changes to Compressed / Consecutive
+[ ] Split themes change from M/W/F version
+[ ] PRINT row 2 copies key program identity
 [ ] HEALTH_CHECK has zero FAIL results
