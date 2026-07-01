@@ -1,0 +1,19 @@
+Release 1.0.0 Build Notes
+
+Purpose:
+Create the permanent ATHENA Production baseline.
+
+Key architecture:
+- GitHub is the master repository.
+- Google Apps Script is runtime only.
+- INSTALL_ME contains .gs files only.
+- DOCUMENTATION contains read-only project files.
+- Athlete Level replaces separate Age Group + Experience.
+- Gender is included as a mild future programming-bias control.
+- Ecosystem controls are removed.
+- Weekly calendar checkboxes determine training day count and spacing.
+- Schedule spacing affects future CNS and split theme logic.
+- PRINT row 1 is editable from HOME.
+- PRINT row 2 copies key HOME selections.
+
+This release has exactly 8 Apps Script modules.

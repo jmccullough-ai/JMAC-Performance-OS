@@ -1,6 +1,6 @@
-2026-06-30
-- Updated Release 1.0.0.
-- Removed ecosystem controls.
-- Added HOME weekly checkbox calendar.
-- Added WEEKLY_SCHEDULE sheet.
-- Added spacing-aware split/CNS theme foundation.
+2026-07-01
+- Created clean Release 1.0.0 Production Baseline.
+- Standardized INSTALL_ME with .gs files.
+- Removed old AppsScript_Modules format.
+- Removed duplicate module issue.
+- Standardized ATHENA_ file prefix.

@@ -1,0 +1,51 @@
+Release 1.0.0 Test Checklist
+
+Before Apps Script:
+[ ] Old Release_1.0.0 folder deleted locally.
+[ ] Clean ZIP extracted into JMAC-Performance-OS.
+[ ] Release_1.0.0 contains only DOCUMENTATION and INSTALL_ME.
+[ ] INSTALL_ME contains exactly 8 .gs files.
+[ ] No AppsScript_Modules folder exists inside Release_1.0.0.
+[ ] No loose old .txt files exist inside Release_1.0.0.
+
+Apps Script:
+[ ] Created ATHENA_01_Core_Config.gs
+[ ] Created ATHENA_02_Menu.gs
+[ ] Created ATHENA_03_Sheet_Builder.gs
+[ ] Created ATHENA_04_Data_Seed.gs
+[ ] Created ATHENA_05_Weekly_Schedule.gs
+[ ] Created ATHENA_06_Print_Header.gs
+[ ] Created ATHENA_07_Health_Check.gs
+[ ] Created ATHENA_08_Controller.gs
+[ ] There is only one onOpen()
+
+Run:
+ATHENA_installRelease100
+
+Expected sheets:
+[ ] HOME
+[ ] PRINT
+[ ] LOOKUP
+[ ] SPORT_PROFILES
+[ ] ATHLETE_LEVELS
+[ ] WEEKLY_SCHEDULE
+[ ] PROGRESSION_MAP
+[ ] EXERCISE_MASTER
+[ ] PROGRAM_RULES
+[ ] HEALTH_CHECK
+
+Expected controls:
+[ ] HOME has Gender dropdown
+[ ] HOME has Athlete Level dropdown
+[ ] HOME has Monday-Sunday checkboxes
+[ ] Default checked days are Monday, Wednesday, Friday
+[ ] Training Days Count shows 3
+[ ] Schedule Pattern shows Spaced
+
+Spacing test:
+[ ] Change checkboxes to Monday, Tuesday, Wednesday
+[ ] Run ATHENA_refreshWeeklySchedule
+[ ] Schedule Pattern changes to Compressed / Consecutive
+
+Health:
+[ ] HEALTH_CHECK has zero FAIL results

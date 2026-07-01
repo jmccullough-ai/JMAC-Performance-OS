@@ -1,8 +1,8 @@
 Current Release:
-Release 1.0.0 — Core Foundation
+Release 1.0.0 — Production Baseline
 
 Status:
-Ready to install into ATHENA Development.
+Generated cleanly.
 
-Installer function:
+Installer:
 ATHENA_installRelease100

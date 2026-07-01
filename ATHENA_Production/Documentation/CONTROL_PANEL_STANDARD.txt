@@ -1,28 +1,26 @@
 ATHENA Production Control Panel Standard
 
-Release 1.0.0 HOME controls:
-1. Program Title
-2. Facility / Team
-3. Coach Name
-4. Sport
-5. Gender
-6. Athlete Level
-7. Phase
-8. Training Days
-9. Primary Goal
-10. Primary Ecosystem
-11. Secondary Ecosystem
-12. Session Type
-13. Print Header Text
+HOME controls:
+- Program Title
+- Facility / Team
+- Coach Name
+- Sport
+- Gender
+- Athlete Level
+- Phase
+- Primary Goal
+- Print Header Text
+- Monday-Sunday training day checkboxes
 
-Athlete Level replaces Age Group + Experience:
-Level 1 - Foundation 1
-Level 2 - Foundation 2
-Level 3 - Development 1
-Level 4 - Development 2
-Level 5 - Performance 1
-Level 6 - Performance 2
+Removed:
+- Primary Ecosystem
+- Secondary Ecosystem
 
-Print page behavior:
-- Row 1 uses editable title/header text from HOME.
-- Row 2 copies key program identity fields from HOME.
+Weekly calendar:
+Checked training days determine:
+- Training Days Count
+- Schedule Pattern
+- CNS Type
+- Split Theme
+- Speed/Power Theme
+- Strength Theme

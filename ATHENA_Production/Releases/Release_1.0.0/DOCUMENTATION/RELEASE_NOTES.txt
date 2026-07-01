@@ -1,0 +1,20 @@
+Release 1.0.0 — Production Baseline
+
+Included:
+- Core config
+- Single ATHENA Production menu
+- HOME control panel
+- Monday-Sunday weekly training calendar
+- WEEKLY_SCHEDULE sheet
+- PRINT header foundation
+- LOOKUP data
+- SPORT_PROFILES
+- ATHLETE_LEVELS
+- PROGRESSION_MAP
+- EXERCISE_MASTER headers
+- PROGRAM_RULES
+- HEALTH_CHECK
+
+No workout generation yet.
+No exercise selection yet.
+No print workout engine yet.

@@ -1,7 +1,0 @@
-Release 1.0.0 Build Notes
-
-- Athlete Level replaces Age Group + Experience.
-- Gender remains as a mild programming-bias control.
-- Ecosystem controls removed.
-- Weekly calendar checkboxes now drive training day count, spacing pattern, CNS type, and split themes.
-- M/W/F produces a different foundation than Mon/Tue/Wed.

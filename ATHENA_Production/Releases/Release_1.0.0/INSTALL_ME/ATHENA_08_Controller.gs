@@ -6,6 +6,7 @@
 function ATHENA_installRelease100() {
   ATHENA_buildFoundationSheets_();
   ATHENA_seedFoundationData_();
+  ATHENA_refreshWeeklySchedule();
   ATHENA_refreshPrintHeader();
   ATHENA_runHealthCheck();
   ATHENA_goToHome();
