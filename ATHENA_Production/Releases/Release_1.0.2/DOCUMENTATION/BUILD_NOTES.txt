@@ -1,0 +1,21 @@
+Release 1.0.2 Build Notes
+
+Purpose:
+Verified baseline that installs cleanly before adding workout generation.
+
+Included:
+- Centralized HOME constants
+- Correct validation order
+- Weekly calendar
+- Schedule pattern logic
+- Print header logic
+- Templates sheet
+- Coach workflow menu
+
+Menu includes:
+- Build Program
+- Refresh Weekly Schedule
+- Refresh Print Header
+- Go to Print View
+- Save Current Setup as Template
+- Run Health Check

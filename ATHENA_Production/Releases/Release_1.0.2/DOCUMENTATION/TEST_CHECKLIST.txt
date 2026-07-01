@@ -1,0 +1,28 @@
+Release 1.0.2 Test Checklist
+
+Run:
+ATHENA_installRelease102
+
+Check:
+[ ] No Apps Script error
+[ ] HOME created
+[ ] PRINT created
+[ ] LOOKUP created
+[ ] WEEKLY_SCHEDULE created
+[ ] TEMPLATES created
+[ ] HEALTH_CHECK created
+[ ] Sport dropdown works
+[ ] Gender dropdown works
+[ ] Athlete Level dropdown works
+[ ] Phase dropdown works
+[ ] Primary Goal dropdown works
+[ ] Default schedule is Monday/Wednesday/Friday
+[ ] Training Days Count = 3
+[ ] Schedule Pattern = Spaced
+[ ] Change to Monday/Tuesday/Wednesday
+[ ] Run ATHENA_refreshWeeklySchedule
+[ ] Schedule Pattern = Compressed / Consecutive
+[ ] Reload sheet
+[ ] ATHENA Production menu appears
+[ ] Save Current Setup as Template works
+[ ] HEALTH_CHECK has zero FAIL results
