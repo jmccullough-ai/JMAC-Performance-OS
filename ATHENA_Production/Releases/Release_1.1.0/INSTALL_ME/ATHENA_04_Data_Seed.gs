@@ -1,0 +1,233 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Release 1.1.0 — Data Seed
+ */
+
+function ATHENA_seedFoundationData_() {
+  ATHENA_seedLookup_();
+  ATHENA_seedSportProfiles_();
+  ATHENA_seedAthleteLevels_();
+  ATHENA_seedProgressionMap_();
+  ATHENA_seedProgramRules_();
+  ATHENA_seedCoachPhilosophy_();
+  ATHENA_seedCoachDna_();
+  ATHENA_seedMovementFamilies_();
+  ATHENA_applyHomeValidations_();
+  ATHENA_seedHomeDefaults_();
+  ATHENA_refreshWeeklySchedule();
+  ATHENA_refreshPrintHeader();
+}
+
+function ATHENA_seedLookup_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.lookup);
+  const rows = [
+    ['Sport', 'Football', 1, true],
+    ['Sport', 'Basketball', 2, true],
+    ['Sport', 'Track', 3, true],
+    ['Sport', 'Soccer', 4, true],
+    ['Sport', 'Baseball', 5, true],
+    ['Sport', 'Softball', 6, true],
+    ['Sport', 'Lacrosse', 7, true],
+    ['Sport', 'Wrestling', 8, true],
+    ['Sport', 'Volleyball', 9, true],
+    ['Sport', 'Cross Country', 10, true],
+    ['Sport', 'Hockey', 11, true],
+    ['Sport', 'Golf', 12, true],
+    ['Sport', 'General Athlete', 99, true],
+
+    ['Gender', 'Male', 1, true],
+    ['Gender', 'Female', 2, true],
+    ['Gender', 'Mixed Group', 3, true],
+    ['Gender', 'Not Specified', 4, true],
+
+    ['Athlete Level', 'Level 1 - Foundation 1', 1, true],
+    ['Athlete Level', 'Level 2 - Foundation 2', 2, true],
+    ['Athlete Level', 'Level 3 - Development 1', 3, true],
+    ['Athlete Level', 'Level 4 - Development 2', 4, true],
+    ['Athlete Level', 'Level 5 - Performance 1', 5, true],
+    ['Athlete Level', 'Level 6 - Performance 2', 6, true],
+
+    ['Phase', 'Foundation', 1, true],
+    ['Phase', 'Accumulation', 2, true],
+    ['Phase', 'Intensification', 3, true],
+    ['Phase', 'Power', 4, true],
+    ['Phase', 'In-Season', 5, true],
+    ['Phase', 'Return to Play', 6, true],
+
+    ['Primary Goal', 'Speed', 1, true],
+    ['Primary Goal', 'Strength', 2, true],
+    ['Primary Goal', 'Power', 3, true],
+    ['Primary Goal', 'Movement Quality', 4, true],
+    ['Primary Goal', 'General Performance', 5, true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, 4).setValues(rows);
+}
+
+function ATHENA_seedSportProfiles_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.sportProfiles);
+  const rows = [
+    ['Football', 'Acceleration, Collision, Power', 'COD, Max Strength', 'Neck, Hamstrings, Groin, Tibialis', 'Acceleration', 'Total Body Strength', 'Triple Extension', 'Neck / Groin / Hamstrings', true],
+    ['Basketball', 'Elasticity, Landing, Deceleration', 'Acceleration, Lateral Movement', 'Patellar Tendon, Soleus, Landing', 'Multi-Directional Speed', 'Unilateral Strength', 'Elastic Power', 'Knee / Ankle / Landing', true],
+    ['Track', 'Acceleration, Max Velocity, Elasticity', 'Power, Stiffness, Posture', 'Hamstrings, Hip Flexor, Foot', 'Sprint Mechanics', 'Posterior Chain Strength', 'Elastic Power', 'Hamstring / Foot / Hip', true],
+    ['Soccer', 'Repeated Sprint, COD, Aerobic Support', 'Groin Strength, Deceleration', 'Groin, Adductors, Hamstrings', 'COD / Repeated Sprint', 'Unilateral Strength', 'Lateral Power', 'Groin / Hamstring / Ankle', true],
+    ['Baseball', 'Rotational Power, Sprint Burst', 'Shoulder Health, Hip Power', 'Rotator Cuff, Scap, Forearm', 'Acceleration', 'Total Body Strength', 'Rotational Power', 'Shoulder / Forearm / Hip', true],
+    ['Softball', 'Rotational Power, Sprint Burst', 'Shoulder Health, Hip Power', 'Rotator Cuff, Scap, Forearm', 'Acceleration', 'Total Body Strength', 'Rotational Power', 'Shoulder / Forearm / Hip', true],
+    ['Lacrosse', 'Acceleration, COD, Contact', 'Repeated Sprint, Rotation', 'Ankle, Groin, Shoulder', 'COD / Acceleration', 'Total Body Strength', 'Rotational Power', 'Groin / Ankle / Shoulder', true],
+    ['Wrestling', 'Grip, Trunk, Total Body Strength', 'Power Endurance, Mobility', 'Neck, Shoulder, Knee', 'Mat Speed', 'Total Body Strength', 'Explosive Strength', 'Neck / Shoulder / Trunk', true],
+    ['Volleyball', 'Elasticity, Jumping, Landing', 'Shoulder Health, Lateral Movement', 'Patellar Tendon, Shoulder, Ankle', 'Approach / Lateral', 'Unilateral Strength', 'Jump Power', 'Knee / Shoulder / Ankle', true],
+    ['Cross Country', 'Rhythm, Tissue Capacity, Posture', 'Foot Strength, Hip Stability', 'Foot, Tibialis, Hip', 'Running Mechanics', 'General Strength', 'Low-Level Elasticity', 'Foot / Hip / Trunk', true],
+    ['Hockey', 'Lateral Power, Acceleration, Contact', 'Groin Strength, Rotation', 'Groin, Hip, Adductors', 'Lateral Acceleration', 'Unilateral Strength', 'Lateral Power', 'Groin / Hip / Trunk', true],
+    ['Golf', 'Rotation, Mobility, Power Transfer', 'Trunk Strength, Hip Mobility', 'Low Back, Hip, Shoulder', 'Movement Quality', 'Trunk Strength', 'Rotational Power', 'Hip / Shoulder / Trunk', true],
+    ['General Athlete', 'Movement Quality, Speed, Strength', 'Power, Armor', 'General Tissue Capacity', 'Acceleration', 'Total Body Strength', 'General Power', 'General Armor', true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, 9).setValues(rows);
+}
+
+function ATHENA_seedAthleteLevels_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.athleteLevels);
+  const rows = [
+    [1, 'Level 1 - Foundation 1', 'Youth / true beginner', 'Positions, rhythm, posture', 'March / skip', 'Pogo / snapdown', 'March sled push', 'Assisted pogo', 'Snapdown stick', 'Jump shrug', true],
+    [2, 'Level 2 - Foundation 2', 'Middle school / early trained', 'Basic sprint, jump, brace', 'Falling start', 'Low box jump', 'Light sled push', 'Assisted vertical jump', 'Low landing', 'DB clean pattern', true],
+    [3, 'Level 3 - Development 1', 'HS beginner / developing', 'Controlled intensity', 'Push-up start', 'Repeated broad jump', 'Moderate sled push', 'Resisted vertical jump', 'Low depth drop', 'High pull', true],
+    [4, 'Level 4 - Development 2', 'HS intermediate', 'Higher output', 'Flying sprint intro', 'Hurdle hop / bounds', 'Light resisted sprint', 'Banded lateral jump', 'Depth drop to jump', 'Hang clean pull', true],
+    [5, 'Level 5 - Performance 1', 'Advanced HS / college-ready', 'Contrast and elastic sequencing', 'Fly sprint / wickets', 'Intensive single response', 'Contrast sled to free', 'Contrast band to free', 'Depth jump', 'Hang power clean', true],
+    [6, 'Level 6 - Performance 2', 'College / adult advanced', 'Advanced loading and shock tolerance', 'Advanced MaxV / accel', 'Advanced intensive', 'Advanced contrast', 'Advanced band contrast', 'Rebound depth jump', 'Clean / jerk derivatives', true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, 11).setValues(rows);
+}
+
+function ATHENA_seedProgressionMap_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.progressionMap);
+  const rows = [
+    ['Sprinting', 'March / Skip', 'Falling Start', 'Push-up Start', 'Flying Sprint Intro', 'Wickets / Fly Sprint', 'Advanced MaxV / Accel', 'Progress posture, rhythm, speed, and distance.', true],
+    ['Sled Push / Sprint', 'March Sled Push', 'Light Sled Push', 'Moderate Sled Push', 'Light Resisted Sprint', 'Contrast Sled to Free Sprint', 'Advanced Contrast', 'Acceleration and force application.', true],
+    ['Plyometrics', 'Pogo / Snapdown', 'Low Box Jump', 'Repeated Broad Jump', 'Hurdle Hop / Bounds', 'Intensive Single Response', 'Advanced Intensive', 'Progress contacts, stiffness, amplitude, intensity.', true],
+    ['Band Assisted / Resisted Jumps', 'Assisted Pogo', 'Assisted Vertical Jump', 'Resisted Vertical Jump', 'Banded Lateral Jump', 'Contrast Band to Free Jump', 'Advanced Band Contrast', 'Use for intent, overspeed, stiffness, and contrast.', true],
+    ['Depth Drop / Shock', 'Snapdown Stick', 'Low Altitude Landing', 'Low Depth Drop', 'Depth Drop to Jump', 'Depth Jump', 'Rebound Depth Jump', 'Progress only with excellent landing quality.', true],
+    ['Olympic / Explosive', 'Jump Shrug', 'DB Clean Pattern', 'High Pull / Clean Pull', 'Hang Clean Pull', 'Hang Power Clean', 'Clean / Jerk Derivatives', 'Explosive lifts appear early on high days.', true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, 9).setValues(rows);
+}
+
+function ATHENA_seedProgramRules_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.programRules);
+  const rows = [
+    ['RULE_001', 'Session Order', 'Speed Power First', 'TRUE', 'Speed, elastic, explosive, sled, jump, plyo, and Olympic work belongs early.', true],
+    ['RULE_002', 'High Low', 'High CNS Early', 'TRUE', 'High CNS work is placed first and dosed carefully.', true],
+    ['RULE_003', 'Session Order', 'No Sprint Jump Finishers', 'TRUE', 'Do not place sprinting or jumping at the end as finishers.', true],
+    ['RULE_004', 'Session Requirement', 'Armor Every Session', 'TRUE', 'Every workout must include armor/prehab/tissue capacity.', true],
+    ['RULE_005', 'Athlete Level', 'One Combined Level', 'TRUE', 'Age and experience are combined into Athlete Level.', true],
+    ['RULE_006', 'Weekly Schedule', 'Calendar Drives Split', 'TRUE', 'Checked training days determine day count, spacing, CNS type, and split themes.', true],
+    ['RULE_007', 'Weekly Schedule', 'Back-to-Back Adjusts Intensity', 'TRUE', 'Back-to-back training days should adjust CNS and exercise intensity.', true],
+    ['RULE_008', 'Print System', 'Editable Header', 'TRUE', 'PRINT row 1 is controlled from HOME Print Header Text.', true],
+    ['RULE_009', 'Production Rule', 'GitHub Master', 'TRUE', 'GitHub is master. Apps Script is runtime only.', true],
+    ['RULE_010', 'Production Rule', 'Single onOpen', 'TRUE', 'Only Module 02 may contain onOpen().', true],
+    ['RULE_011', 'Menu Workflow', 'Coach Workflow Menu', 'TRUE', 'Build Program, Print View, Save Template, and Health Check are accessible from the ATHENA Production menu.', true]
+  ];
+
+  sheet.getRange(2, 1, rows.length, 6).setValues(rows);
+}
+
+
+function ATHENA_seedCoachPhilosophy_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.coachPhilosophy);
+  const rows = [
+    ['PHIL_001', 'High/Low System', 'Organize training by CNS demand so high-output work is protected and low days support recovery.', 'Weekly schedule and spacing must influence intensity and theme selection.', true],
+    ['PHIL_002', 'Vertical Integration', 'Train multiple biomotor qualities year-round with shifting emphasis instead of abandoning qualities.', 'Speed, power, strength, mobility, and armor remain present across the year.', true],
+    ['PHIL_003', 'Competency Before Complexity', 'Athletes progress only after demonstrating control of the current regression.', 'Exercise progressions must be tied to mastery, not only calendar time.', true],
+    ['PHIL_004', 'Intent Before Load', 'Explosive intent and technical quality come before heavier loading.', 'Olympic derivatives, jumps, sprints, and throws must preserve output quality.', true],
+    ['PHIL_005', 'Quality Before Fatigue', 'Training should build output, skill, and robustness rather than chase exhaustion.', 'No sprint or jump finishers; finishers must not degrade speed/power mechanics.', true],
+    ['PHIL_006', 'Strength Supports Speed', 'Strength work supports sprinting, jumping, resilience, and sport output.', 'Strength blocks must match the day theme and athlete level.', true],
+    ['PHIL_007', 'Armor Every Session', 'Every session includes tissue capacity, trunk, tendon, joint, or injury-bias work.', 'Armor is a required session component.', true]
+  ];
+  sheet.getRange(2, 1, rows.length, 5).setValues(rows);
+}
+
+function ATHENA_seedCoachDna_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.coachDna);
+  const rows = [
+    ['DNA_001', 'Session Order', 'Speed First', 'Any training session', 'Place speed / movement quality before strength and conditioning.', 1, 'All', true],
+    ['DNA_002', 'Session Order', 'High CNS Early', 'Session contains sprint, jump, throw, sled, Olympic, or explosive work', 'Place high CNS work in the first training blocks.', 1, 'High CNS', true],
+    ['DNA_003', 'Restriction', 'No Sprint Finishers', 'Finisher block requested', 'Never use sprinting or maximal jumping as a finisher.', 1, 'All', true],
+    ['DNA_004', 'Requirement', 'Armor Every Session', 'Any generated workout', 'Include at least one armor / tissue capacity / resilience element.', 1, 'All', true],
+    ['DNA_005', 'Progression', 'Competency Before Progression', 'Athlete has not mastered current level', 'Repeat or regress before advancing.', 1, 'All', true],
+    ['DNA_006', 'Progression', 'Landing Before Rebound', 'Plyometric progression requested', 'Master landing and stick variations before repeated rebound variations.', 1, 'Plyometrics', true],
+    ['DNA_007', 'Weekly Logic', 'Back-to-Back Adjusts Output', 'Training days are consecutive', 'Reduce CNS load or shift middle day toward low / armor / tissue capacity.', 1, 'Weekly Schedule', true],
+    ['DNA_008', 'Exercise Pairing', 'Avoid High Fatigue Pairing', 'Two high CNS or high fatigue movements selected together', 'Separate or replace one exercise with a lower fatigue complement.', 2, 'Strength / Power', true],
+    ['DNA_009', 'Athlete Level', 'Level Controls Complexity', 'Athlete level is low', 'Choose simpler regressions and reduce teaching complexity.', 1, 'All', true],
+    ['DNA_010', 'Programming', 'Biomotors Stay Present', 'Any phase selected', 'Keep speed, power, strength, movement quality, and armor represented with shifting emphasis.', 2, 'All', true]
+  ];
+  sheet.getRange(2, 1, rows.length, 8).setValues(rows);
+}
+
+function ATHENA_seedMovementFamilies_() {
+  const sheet = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.movementFamilies);
+  const rows = [
+    ['FAM_001', 'Sprinting / Acceleration', 'Speed', 'March / Wall Drill', 'Falling Start', 'Push-Up Start', '10-Yard Acceleration', 'Sled Contrast', 'Advanced Acceleration', 'Horizontal force and projection progression.', true],
+    ['FAM_002', 'Max Velocity / Elastic Sprinting', 'Speed', 'Posture Runs', 'A-Skip / Dribble', 'Build-Up Sprint', 'Flying 10', 'Wickets', 'Advanced Fly Sprint', 'Upright sprinting and elastic stiffness.', true],
+    ['FAM_003', 'Sled Push / Sprint', 'Acceleration Strength', 'March Sled Push', 'Light Sled Push', 'Moderate Sled Push', 'Light Resisted Sprint', 'Contrast Sled to Sprint', 'Advanced Contrast', 'Force application without turning sled work into conditioning.', true],
+    ['FAM_004', 'Extensive Plyometrics', 'Elasticity', 'Pogo', 'Line Hop', 'Low Hurdle Rhythm', 'Repeated Broad Jump', 'Bounds', 'Advanced Bounds', 'Low to moderate contacts before intensive plyos.', true],
+    ['FAM_005', 'Landing / Depth Drop', 'Landing', 'Snapdown', 'Altitude Landing', 'Low Depth Drop', 'Depth Drop to Jump', 'Depth Jump', 'Rebound Depth Jump', 'Landing competency before rebound.', true],
+    ['FAM_006', 'Band Assisted / Resisted Jumps', 'Elastic Power', 'Assisted Pogo', 'Assisted Vertical Jump', 'Resisted Vertical Jump', 'Banded Broad Jump', 'Contrast Band to Free Jump', 'Advanced Band Contrast', 'Assisted/resisted intent and contrast options.', true],
+    ['FAM_007', 'Olympic / Explosive Derivatives', 'Power', 'Jump Shrug', 'DB Clean Pattern', 'High Pull', 'Clean Pull', 'Hang Power Clean', 'Clean / Jerk Derivative', 'Explosive lifting family for high CNS days.', true],
+    ['FAM_008', 'Medicine Ball Throws', 'Power', 'Tall Kneeling Throw', 'Chest Pass', 'Rotational Scoop', 'Overhead Throw', 'Step-Behind Throw', 'Advanced Reactive Throw', 'Low skill high intent power development.', true],
+    ['FAM_009', 'Lower Strength', 'Strength', 'Goblet Squat', 'Split Squat', 'RFESS', 'Front Squat', 'Trap Bar Deadlift', 'Advanced Strength Variation', 'Primary lower strength options by level.', true],
+    ['FAM_010', 'Armor / Tissue Capacity', 'Resilience', 'Tibialis / Foot', 'Trunk Brace', 'Hip / Groin', 'Hamstring Iso', 'Shoulder / Neck', 'Integrated Armor Circuit', 'Required in every session.', true]
+  ];
+  sheet.getRange(2, 1, rows.length, 11).setValues(rows);
+}
+
+
+function ATHENA_applyHomeValidations_() {
+  const ss = ATHENA_getSpreadsheet_();
+  const home = ss.getSheetByName(ATHENA_PRODUCTION.sheets.home);
+  const lookup = ss.getSheetByName(ATHENA_PRODUCTION.sheets.lookup);
+  const values = ATHENA_getLookupValuesByCategory_(lookup);
+
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.sport), values['Sport']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.gender), values['Gender']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.athleteLevel), values['Athlete Level']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.phase), values['Phase']);
+  ATHENA_setDropdown_(home.getRange(ATHENA_PRODUCTION.home.primaryGoal), values['Primary Goal']);
+}
+
+function ATHENA_seedHomeDefaults_() {
+  const home = ATHENA_getSpreadsheet_().getSheetByName(ATHENA_PRODUCTION.sheets.home);
+  const h = ATHENA_PRODUCTION.home;
+
+  home.getRange(h.sport).setValue('General Athlete');
+  home.getRange(h.gender).setValue('Mixed Group');
+  home.getRange(h.athleteLevel).setValue('Level 3 - Development 1');
+  home.getRange(h.phase).setValue('Foundation');
+  home.getRange(h.primaryGoal).setValue('General Performance');
+  home.getRange(h.printHeader).setValue('JMAC PERFORMANCE OS');
+}
+
+function ATHENA_getLookupValuesByCategory_(lookupSheet) {
+  const last = lookupSheet.getLastRow();
+  const data = lookupSheet.getRange(2, 1, Math.max(last - 1, 1), 4).getValues();
+  const output = {};
+
+  data.forEach(function(row) {
+    if (!row[0] || !row[1] || row[3] !== true) return;
+    if (!output[row[0]]) output[row[0]] = [];
+    output[row[0]].push(row[1]);
+  });
+
+  return output;
+}
+
+function ATHENA_setDropdown_(range, values) {
+  if (!values || values.length === 0) return;
+
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(values, true)
+    .setAllowInvalid(false)
+    .build();
+
+  range.setDataValidation(rule);
+}

@@ -1,0 +1,6 @@
+Release 1.1.0 — Coach DNA Foundation
+
+This release adds the database layer that begins to define how Coach JMac thinks:
+- Programming philosophy
+- Non-negotiable Coach DNA rules
+- Movement family progressions

@@ -1,3 +1,3 @@
-Current Release: Release 1.0.2 — Installable Baseline
+Current Release: Release 1.1.0 — Coach DNA Foundation
 
-Installer: ATHENA_installRelease102
+Installer: ATHENA_installRelease110

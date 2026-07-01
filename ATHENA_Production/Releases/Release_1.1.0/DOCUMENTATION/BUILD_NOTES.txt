@@ -1,0 +1,15 @@
+Release 1.1.0 Build Notes
+
+Purpose:
+Add the first Coach DNA foundation without changing the working installer structure.
+
+Adds:
+- COACH_PHILOSOPHY
+- COACH_DNA
+- MOVEMENT_FAMILIES
+- Coach DNA menu links
+
+Does not add:
+- Workout generation
+- Exercise selection
+- Print workout engine

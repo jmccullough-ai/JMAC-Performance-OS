@@ -1,0 +1,4 @@
+Next Release:
+Release 1.2.0 — Exercise Object Database Foundation
+
+Do not begin until Release 1.1.0 passes TEST_CHECKLIST.

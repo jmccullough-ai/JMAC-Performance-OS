@@ -1,0 +1,15 @@
+Release 1.1.0 Test Checklist
+
+Run:
+ATHENA_installRelease110
+
+Check:
+[ ] No Apps Script error
+[ ] COACH_PHILOSOPHY sheet exists
+[ ] COACH_DNA sheet exists
+[ ] MOVEMENT_FAMILIES sheet exists
+[ ] COACH_PHILOSOPHY has seeded principles
+[ ] COACH_DNA has seeded rules
+[ ] MOVEMENT_FAMILIES has seeded families
+[ ] ATHENA Production menu includes Coach DNA submenu
+[ ] Health Check has zero FAIL results

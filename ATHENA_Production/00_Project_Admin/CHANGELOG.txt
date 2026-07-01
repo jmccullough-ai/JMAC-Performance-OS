@@ -1,4 +1,6 @@
 2026-07-01
-- Created Release 1.0.2 Installable Baseline.
-- Fixed Apps Script Sheet.clearDataValidations error by clearing validations through the sheet range.
-- Preserved Release 1.0.1 architecture, menu, weekly calendar, template save, and HOME constants.
+- Added Release 1.1.0 Coach DNA Foundation.
+- Added COACH_PHILOSOPHY sheet.
+- Added COACH_DNA sheet.
+- Added MOVEMENT_FAMILIES sheet.
+- Added Coach DNA submenu.

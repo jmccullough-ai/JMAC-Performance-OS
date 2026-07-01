@@ -1,0 +1,15 @@
+Install order:
+1. ATHENA_01_Core_Config.gs
+2. ATHENA_02_Menu.gs
+3. ATHENA_03_Sheet_Builder.gs
+4. ATHENA_04_Data_Seed.gs
+5. ATHENA_05_Weekly_Schedule.gs
+6. ATHENA_06_Print_Header.gs
+7. ATHENA_07_Health_Check.gs
+8. ATHENA_08_Controller.gs
+
+Run:
+ATHENA_installRelease110
+
+Located in:
+ATHENA_08_Controller.gs
