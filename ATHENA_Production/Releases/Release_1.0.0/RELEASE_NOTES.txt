@@ -1,0 +1,14 @@
+Release 1.0.0
+
+Included:
+- Core configuration
+- Single menu/onOpen
+- HOME control panel
+- PRINT header foundation
+- LOOKUP
+- SPORT_PROFILES
+- ATHLETE_LEVELS
+- PROGRESSION_MAP
+- EXERCISE_MASTER headers
+- PROGRAM_RULES
+- HEALTH_CHECK

@@ -1,0 +1,8 @@
+Release 1.0.0 Build Notes
+
+Architecture decisions:
+- Athlete Level replaces Age Group + Experience to prevent conflicting logic.
+- Gender is added as a mild programming-bias control.
+- Editable print header is controlled from HOME.
+- PRINT row 2 copies important HOME selections.
+- High/Low programming logic is part of the foundation.

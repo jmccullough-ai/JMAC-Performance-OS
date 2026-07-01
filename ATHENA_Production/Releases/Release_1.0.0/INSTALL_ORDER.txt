@@ -1,0 +1,12 @@
+Install these Apps Script modules in order:
+
+1. 01_Core_Config.gs
+2. 02_Menu.gs
+3. 03_Sheet_Builder.gs
+4. 04_Data_Seed.gs
+5. 05_Print_Header.gs
+6. 06_Health_Check.gs
+7. 07_Release_1_0_0_Controller.gs
+
+Run:
+ATHENA_installRelease100

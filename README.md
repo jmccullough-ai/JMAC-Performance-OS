@@ -1,3 +1,6 @@
 # JMAC Performance OS
 
-ATHENA Production repository.
+Permanent ATHENA Production repository.
+
+GitHub is the master repository.
+Google Apps Script is the runtime only.

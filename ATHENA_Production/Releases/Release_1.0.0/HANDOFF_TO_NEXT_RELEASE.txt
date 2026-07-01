@@ -1,0 +1,12 @@
+Next Release:
+Release 1.1.0 — Exercise Database
+
+Do not begin until Release 1.0.0 passes the full test checklist.
+
+Release 1.1.0 should build:
+- Permanent exercise database
+- Athlete Level filters
+- High/Low tags
+- Progression family tags
+- Gender bias tags
+- Sport bias tags

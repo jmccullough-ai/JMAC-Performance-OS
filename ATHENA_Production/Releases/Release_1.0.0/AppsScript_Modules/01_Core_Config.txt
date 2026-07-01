@@ -1,0 +1,53 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Release 1.0.0 — Core Foundation
+ * Module 01: Core Config
+ */
+
+const ATHENA_PRODUCTION = {
+  appName: 'JMAC Performance OS',
+  systemName: 'ATHENA Production',
+  release: 'Release 1.0.0',
+  version: '1.0.0',
+  buildDate: '2026-06-30',
+  menuName: 'ATHENA Production',
+  sheets: {
+    home: 'HOME',
+    print: 'PRINT',
+    lookup: 'LOOKUP',
+    sportProfiles: 'SPORT_PROFILES',
+    athleteLevels: 'ATHLETE_LEVELS',
+    progressionMap: 'PROGRESSION_MAP',
+    exerciseMaster: 'EXERCISE_MASTER',
+    programRules: 'PROGRAM_RULES',
+    healthCheck: 'HEALTH_CHECK'
+  },
+  colors: {
+    purple: '#4B0082',
+    black: '#111111',
+    white: '#FFFFFF',
+    greyDark: '#444444',
+    greyLight: '#F3F3F3',
+    green: '#D9EAD3',
+    red: '#F4CCCC',
+    yellow: '#FFF2CC'
+  },
+  fonts: { primary: 'Arial' }
+};
+
+function ATHENA_getConfig_() {
+  return ATHENA_PRODUCTION;
+}
+
+function ATHENA_requiredSheetNames_() {
+  const s = ATHENA_PRODUCTION.sheets;
+  return [s.home, s.print, s.lookup, s.sportProfiles, s.athleteLevels, s.progressionMap, s.exerciseMaster, s.programRules, s.healthCheck];
+}
+
+function ATHENA_getSpreadsheet_() {
+  return SpreadsheetApp.getActiveSpreadsheet();
+}
+
+function ATHENA_toast_(message, title) {
+  ATHENA_getSpreadsheet_().toast(message, title || ATHENA_PRODUCTION.systemName, 5);
+}

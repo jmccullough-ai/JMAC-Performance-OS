@@ -1,0 +1,185 @@
+/**
+ * JMAC Performance OS — ATHENA Production
+ * Release 1.0.0 — Sheet Builder
+ */
+
+function ATHENA_buildFoundationSheets_() {
+  const ss = ATHENA_getSpreadsheet_();
+  ATHENA_requiredSheetNames_().forEach(name => ATHENA_createOrClearSheet_(ss, name));
+  ATHENA_orderSheets_(ss, ATHENA_requiredSheetNames_());
+
+  ATHENA_buildHomeSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.home));
+  ATHENA_buildPrintSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.print));
+  ATHENA_buildLookupSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.lookup));
+  ATHENA_buildSportProfilesSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.sportProfiles));
+  ATHENA_buildAthleteLevelsSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.athleteLevels));
+  ATHENA_buildProgressionMapSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.progressionMap));
+  ATHENA_buildExerciseMasterSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.exerciseMaster));
+  ATHENA_buildProgramRulesSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.programRules));
+  ATHENA_buildHealthCheckSheet_(ss.getSheetByName(ATHENA_PRODUCTION.sheets.healthCheck));
+}
+
+function ATHENA_createOrClearSheet_(ss, sheetName) {
+  let sh = ss.getSheetByName(sheetName);
+  if (!sh) sh = ss.insertSheet(sheetName);
+  sh.clear();
+  sh.clearConditionalFormatRules();
+  sh.setFrozenRows(0);
+  sh.setFrozenColumns(0);
+  sh.setHiddenGridlines(true);
+  return sh;
+}
+
+function ATHENA_orderSheets_(ss, names) {
+  names.forEach((name, i) => {
+    ss.setActiveSheet(ss.getSheetByName(name));
+    ss.moveActiveSheet(i + 1);
+  });
+}
+
+function ATHENA_baseFormat_(sh) {
+  sh.getRange(1, 1, Math.max(sh.getMaxRows(), 80), Math.max(sh.getMaxColumns(), 20))
+    .setFontFamily(ATHENA_PRODUCTION.fonts.primary)
+    .setFontSize(10)
+    .setVerticalAlignment('middle');
+}
+
+function ATHENA_styleHeader_(range) {
+  range.setBackground(ATHENA_PRODUCTION.colors.greyDark)
+    .setFontColor(ATHENA_PRODUCTION.colors.white)
+    .setFontWeight('bold')
+    .setHorizontalAlignment('center')
+    .setWrap(true);
+}
+
+function ATHENA_title_(sh, title, subtitle) {
+  sh.getRange('A1:H1').merge().setValue(title)
+    .setBackground(ATHENA_PRODUCTION.colors.purple)
+    .setFontColor(ATHENA_PRODUCTION.colors.white)
+    .setFontWeight('bold')
+    .setFontSize(16)
+    .setHorizontalAlignment('center');
+  sh.getRange('A2:H2').merge().setValue(subtitle)
+    .setBackground(ATHENA_PRODUCTION.colors.black)
+    .setFontColor(ATHENA_PRODUCTION.colors.white)
+    .setFontWeight('bold')
+    .setHorizontalAlignment('center');
+}
+
+function ATHENA_buildHomeSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  ATHENA_title_(sh, 'JMAC Performance OS', 'ATHENA Production — Release 1.0.0 Core Foundation');
+
+  const rows = [
+    ['Program Control', 'Selection', 'Notes'],
+    ['Program Title', 'JMAC Performance OS', 'Editable. Used on PRINT row 1.'],
+    ['Facility / Team', 'JMAC Performance', 'Editable. Used on PRINT row 1.'],
+    ['Coach Name', 'Coach JMac', 'Editable. Used on PRINT row 1.'],
+    ['Sport', '', 'Sport-specific demand profile.'],
+    ['Gender', '', 'Mild bias for future volume, landing, and armor logic.'],
+    ['Athlete Level', '', 'Combined age, training age, and readiness.'],
+    ['Phase', '', 'Training phase.'],
+    ['Training Days', '', 'Weekly training frequency.'],
+    ['Primary Goal', '', 'Main program outcome.'],
+    ['Primary Ecosystem', '', 'Main training bias.'],
+    ['Secondary Ecosystem', '', 'Secondary training bias.'],
+    ['Session Type', '', 'High/Low session control.'],
+    ['Print Header Text', 'JMAC PERFORMANCE OS', 'Editable. Main PRINT header.'],
+    ['Status', 'Release 1.0.0 Installed', 'Foundation only. Workout generation begins later.']
+  ];
+
+  sh.getRange(4, 1, rows.length, 3).setValues(rows);
+  ATHENA_styleHeader_(sh.getRange(4, 1, 1, 3));
+  sh.getRange(5, 1, rows.length - 1, 3).setBorder(true, true, true, true, true, true);
+  sh.setColumnWidth(1, 190);
+  sh.setColumnWidth(2, 260);
+  sh.setColumnWidth(3, 470);
+  sh.setFrozenRows(4);
+}
+
+function ATHENA_buildPrintSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  sh.getRange('A1:H1').merge().setValue('JMAC PERFORMANCE OS')
+    .setBackground(ATHENA_PRODUCTION.colors.purple)
+    .setFontColor(ATHENA_PRODUCTION.colors.white)
+    .setFontWeight('bold')
+    .setFontSize(18)
+    .setHorizontalAlignment('center');
+
+  sh.getRange('A2:H2').merge().setValue('Sport | Gender | Athlete Level | Phase | Days | Goal | Ecosystems | Session Type')
+    .setBackground(ATHENA_PRODUCTION.colors.black)
+    .setFontColor(ATHENA_PRODUCTION.colors.white)
+    .setFontWeight('bold')
+    .setHorizontalAlignment('center')
+    .setWrap(true);
+
+  const rows = [
+    ['Section', 'Status', 'Notes'],
+    ['Print Header', 'Editable from HOME', 'Use HOME row 18 Print Header Text.'],
+    ['Program Identity Row', 'Auto-filled from HOME', 'Use menu item Refresh Print Header after control changes.'],
+    ['Workout Output', 'Not built yet', 'Workout generation begins in a later release.']
+  ];
+  sh.getRange(4, 1, rows.length, 3).setValues(rows);
+  ATHENA_styleHeader_(sh.getRange(4, 1, 1, 3));
+  sh.getRange(5, 1, rows.length - 1, 3).setBorder(true, true, true, true, true, true);
+  sh.setColumnWidths(1, 8, 120);
+  sh.setRowHeight(1, 34);
+  sh.setRowHeight(2, 42);
+}
+
+function ATHENA_buildLookupSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  const h = ['Category', 'Value', 'Sort_Order', 'Active'];
+  sh.getRange(1,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(1,1,1,h.length));
+  sh.setFrozenRows(1);
+}
+
+function ATHENA_buildSportProfilesSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  const h = ['Sport','Primary_Demands','Secondary_Demands','Common_Injury_Bias','Speed_Bias','Strength_Bias','Power_Bias','Armor_Bias','Active'];
+  sh.getRange(1,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(1,1,1,h.length));
+  sh.setFrozenRows(1);
+}
+
+function ATHENA_buildAthleteLevelsSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  const h = ['Level_ID','Athlete_Level','Typical_Profile','Training_Readiness','Sprint_Progression','Plyo_Progression','Sled_Progression','Band_Jump_Progression','Depth_Drop_Progression','Olympic_Progression','Active'];
+  sh.getRange(1,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(1,1,1,h.length));
+  sh.setFrozenRows(1);
+}
+
+function ATHENA_buildProgressionMapSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  const h = ['Family','Level_1','Level_2','Level_3','Level_4','Level_5','Level_6','Notes','Active'];
+  sh.getRange(1,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(1,1,1,h.length));
+  sh.setFrozenRows(1);
+}
+
+function ATHENA_buildExerciseMasterSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  const h = ['Exercise_ID','Exercise_Name','Category','Pattern','Plane','Progression_Family','Min_Athlete_Level','Max_Athlete_Level','Primary_Quality','Secondary_Quality','Equipment','CNS_Level','Complexity','High_Low_Type','Gender_Bias','Coach_Tag','Active'];
+  sh.getRange(1,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(1,1,1,h.length));
+  sh.setFrozenRows(1);
+}
+
+function ATHENA_buildProgramRulesSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  const h = ['Rule_ID','Rule_Type','Rule_Name','Rule_Value','Notes','Active'];
+  sh.getRange(1,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(1,1,1,h.length));
+  sh.setFrozenRows(1);
+}
+
+function ATHENA_buildHealthCheckSheet_(sh) {
+  ATHENA_baseFormat_(sh);
+  ATHENA_title_(sh, 'ATHENA Production Health Check', 'Release 1.0.0 Validation');
+  const h = ['Check','Status','Details'];
+  sh.getRange(4,1,1,h.length).setValues([h]);
+  ATHENA_styleHeader_(sh.getRange(4,1,1,h.length));
+  sh.setFrozenRows(4);
+}
